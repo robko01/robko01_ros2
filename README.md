@@ -38,3 +38,10 @@ source install/setup.bash
 ```
  ros2 run robko01_ros2 service -- /dev/ttyUSB0 orlin369
 ```
+
+## Run the client for sending trajectory to the service
+
+ - Run the controller
+```
+ ros2 run robko01_ros2 client
+```
