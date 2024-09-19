@@ -171,18 +171,16 @@ class Robko01Service(Node):
         feedback_msg = FollowJointTrajectory.Feedback()
 
         for point in goal_handle.request.trajectory.points:
+
+            # TODO: Scale values to some unit in angle speed.
+            # Set velocities and ask controller to made it.
+            int_velocities = [int(x) for x in point.velocities]
+            self.__current_speed[1:12:2] = int_velocities
+            self.__put_action(Actions.UpdateSpeeds)
+
             # Here we just log the points and assume execution happens instantly.
-            self.__logger.info(f'Processing trajectory point: {point.velocities}')
             feedback_msg.actual.positions = point.positions
             feedback_msg.actual.velocities = point.velocities
-
-            for velocity in point.velocities:
-                print(f"Velocity: {velocity}")
-
-            self.__current_speed[1] = int(point.velocities[0])
-            self.__put_action(Actions.UpdateSpeeds)
-            # self.__put_action(Actions.UpdateOutputs)
-
             goal_handle.publish_feedback(feedback_msg)
 
             # Simulate some time delay (in a real robot, you'd move joints here)
@@ -195,13 +193,16 @@ class Robko01Service(Node):
 
 #endregion
 
-#region Private Methods (Action Handler)
+#region Private Methods (Robot Action Handler)
 
     def __put_action(self, action):
 
         self.__actions_queue.put(action)
 
     def __do_action(self, action):
+
+        if self.__controller is None:
+            return
 
         if action == Actions.NONE:
             pass
