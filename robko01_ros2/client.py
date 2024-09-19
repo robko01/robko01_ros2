@@ -75,7 +75,7 @@ class Robko01FollowJointTrajectoryClient(Node):
     def get_result_callback(self, future):
         result = future.result().result
         self.__logger.info(f'Result: {result.error_code}')
-        # rclpy.shutdown()
+        rclpy.shutdown()
         # self.destroy_node()
 
 
