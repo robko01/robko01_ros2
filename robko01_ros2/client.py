@@ -35,7 +35,7 @@ class Robko01FollowJointTrajectoryClient(Node):
         super().__init__('robko01_follow_joint_trajectory_client')
 
         self.__logger = self.get_logger()
-        self.__logger.info("HOI")
+        self.__logger.info("HOI -> Human Oral Interaction")
 
         # Create the action client
         self._action_client = ActionClient(
@@ -51,13 +51,36 @@ class Robko01FollowJointTrajectoryClient(Node):
         goal_msg.trajectory.joint_names = ['base', 'shoulder', 'elbow', 'ld', 'rd', 'gripper']
 
         # Define trajectory points
-        point = JointTrajectoryPoint()
-        point.positions = [200.0, 200.0, 200.0, 200.0, 200.0, 200.0]
-        point.velocities = [-5.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        point.accelerations = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        point.time_from_start.sec = 2
+        point_1 = JointTrajectoryPoint()
+        # point.positions = [200.0, 200.0, 200.0, 200.0, 200.0, 200.0]
+        point_1.positions = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_1.velocities = [-100.0, 100.0, 100.0, 0.0, 0.0, 0.0]
+        point_1.accelerations = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_1.time_from_start.sec = 2
 
-        goal_msg.trajectory.points.append(point)
+        goal_msg.trajectory.points.append(point_1)
+
+        # Define trajectory points
+        point_2 = JointTrajectoryPoint()
+        # point.positions = [200.0, 200.0, 200.0, 200.0, 200.0, 200.0]
+        point_2.positions = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_2.velocities = [100.0, -100.0, -100.0, 0.0, 0.0, 0.0]
+        point_2.accelerations = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_2.time_from_start.sec = 2
+
+        goal_msg.trajectory.points.append(point_2)
+
+        # Define trajectory points
+        point_3 = JointTrajectoryPoint()
+        # point.positions = [200.0, 200.0, 200.0, 200.0, 200.0, 200.0]
+        point_3.positions = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        # point_3.velocities = [-5.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_3.velocities = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_3.accelerations = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        point_3.time_from_start.sec = 2
+
+        goal_msg.trajectory.points.append(point_3)
+
 
         self._send_goal_future = self._action_client.send_goal_async(goal_msg)
         self._send_goal_future.add_done_callback(self.goal_response_callback)
