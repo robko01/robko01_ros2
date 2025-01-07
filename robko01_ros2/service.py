@@ -45,7 +45,6 @@ from robko01.utils.actions import Actions
 import serial
 
 class Robko01Service(Node):
-#0889487321 - Manol
 
 #region Attributes
 
@@ -90,14 +89,26 @@ class Robko01Service(Node):
         super().__init__('robko01_ros2')
 
         self.__logger = self.get_logger()
-        self.__logger.info("HOI")
+        self.__logger.info("HOI -> Human Oral Interaction")
+
+        # Declare parameters
+        self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
+        self.declare_parameter('port', 8000)        # Default value is 8000
+        self.declare_parameter('cname', "orlin369")        # Default value is orlin369
+
+        # Get parameter values
+        host = self.get_parameter('host').get_parameter_value().string_value
+        port = self.get_parameter('port').get_parameter_value().integer_value
+        cname = self.get_parameter('cname').get_parameter_value().string_value
+
+        # Manual convert to string.
+        port = str(port)
 
         # Create the robot controller.
-        port = "/dev/ttyUSB0"
-        cname = "orlin369"
-        self.__controller = ControllerFactory.create(port=port, cname=cname)
+        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
         """Controller
         """
+        self.__controller.connect()
 
         # Create the action server.
         self._action_server = ActionServer(
@@ -155,7 +166,20 @@ class Robko01Service(Node):
 
 #endregion
 
-#region Private Methods (Service Handler)
+#region Public Methods (Node Interface)
+
+    def destroy_node(self):
+
+        # Release the robot resource.
+        if self.__controller is not None:
+            self.__controller.disconnect()
+
+        # Call the base class method to perform the default destruction process
+        super().destroy_node()
+
+#endregion
+
+#region Public Methods (Service Interface)
 
     def goal_callback(self, goal_request):
         # Accept all goals for now
@@ -274,6 +298,7 @@ class Robko01Service(Node):
             rclpy.spin_once(self, timeout_sec=1.0)  # Sync with ROS2 spin time
 
 #endregion
+
 
 def main(args=None):
     rclpy.init(args=args)
