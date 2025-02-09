@@ -96,6 +96,15 @@
 				<box size="0.167 0.088 0.200"/>
 			</geometry>
 		</collision>
+		<visual name="torso_axis">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 0.0 1.0 1.0"/>
+			</material>
+		</visual>
 		<visual name="torso_l">
 			<origin xyz="-0.0385 0.044 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
@@ -206,6 +215,15 @@
 				<box size="0.085 0.044 0.250"/>
 			</geometry>
 		</collision>
+		<visual name="shoulder_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
 		<visual name="shoulder_l">
 			<origin xyz="0.0 0.039 0.080" rpy="0.0 0.0 0.0" />
 			<geometry>
@@ -253,6 +271,15 @@
 				<box size="0.220 0.050 0.050"/>
 			</geometry>
 		</collision>
+		<visual name="elbow_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
 		<visual name="elbow">
 			<origin xyz="0.080 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
@@ -271,6 +298,15 @@
 		<limit upper="1.0" lower="-1.5707963705063" velocity="3" effort="10" />
 	</joint>
 	<link name="p">
+		<visual name="p_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
 		<!-- Hollow joint to simulate and cheet differential drive. -->
 	</link>
 	<joint type="revolute" name="r">
@@ -292,6 +328,24 @@
 				<box size="0.019 0.07 0.019"/>
 			</geometry>
 		</collision>
+		<visual name="p_axis">
+			<origin xyz="0.0275 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="r_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="0.0 -1.5707963705063 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="1.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
 		<visual name="r">
 			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
@@ -302,50 +356,50 @@
 			</material>
 		</visual>
 	</link>
-	<joint type="revolute" name="grpper_1">
+	<joint type="revolute" name="gripper_1">
 		<parent link="gripper_main" />
-		<child link="grpper_1" />
+		<child link="gripper_1" />
 		<origin xyz="0.0275 -0.035 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
 	</joint>
 	<joint type="revolute" name="gripper_2">
 		<parent link="gripper_main" />
-		<child link="grpper_2" />
+		<child link="gripper_2" />
 		<origin xyz="0.0275 -0.028 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="grpper_1" multiplier="1.0" offset="0.0" />
+		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
 	</joint>
-	<joint type="revolute" name="grpper_3">
+	<joint type="revolute" name="gripper_3">
 		<parent link="gripper_main" />
-		<child link="grpper_3" />
+		<child link="gripper_3" />
 		<origin xyz="0.0275 0.035 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="grpper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
 	</joint>
 	<joint type="revolute" name="gripper_4">
 		<parent link="gripper_main" />
-		<child link="grpper_4" />
+		<child link="gripper_4" />
 		<origin xyz="0.0275 0.028 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="grpper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<link name="grpper_1">
+	<link name="gripper_1">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_1">
+		<collision name="gripper_1">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_1">
+		<visual name="gripper_1">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -355,19 +409,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="grpper_2">
+	<link name="gripper_2">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_2">
+		<collision name="gripper_2">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_2">
+		<visual name="gripper_2">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -377,19 +431,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="grpper_3">
+	<link name="gripper_3">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_3">
+		<collision name="gripper_3">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_3">
+		<visual name="gripper_3">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -399,19 +453,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="grpper_4">
+	<link name="gripper_4">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_4">
+		<collision name="gripper_4">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_4">
+		<visual name="gripper_4">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -422,26 +476,26 @@
 		</visual>
 	</link>
 	<joint type="revolute" name="gripper_5">
-		<parent link="grpper_2" />
-		<child link="grpper_5" />
+		<parent link="gripper_2" />
+		<child link="gripper_5" />
 		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="grpper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<link name="grpper_5">
+	<link name="gripper_5">
 		<inertial>
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_5">
+		<collision name="gripper_5">
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_5">
+		<visual name="gripper_5">
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
@@ -452,26 +506,26 @@
 		</visual>
 	</link>
 	<joint type="revolute" name="gripper_6">
-		<parent link="grpper_4" />
-		<child link="grpper_6" />
+		<parent link="gripper_4" />
+		<child link="gripper_6" />
 		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="grpper_1" multiplier="1.0" offset="0.0" />
+		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
 	</joint>
-	<link name="grpper_6">
+	<link name="gripper_6">
 		<inertial>
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="grpper_6">
+		<collision name="gripper_6">
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
 			</geometry>
 		</collision>
-		<visual name="grpper_6">
+		<visual name="gripper_6">
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
