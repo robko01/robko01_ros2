@@ -3,7 +3,7 @@
 <package format="3">
   <name>robko01_ros2</name>
   <version>0.0.0</version>
-  <description>ROS2 python package for supproting Robko01</description>
+  <description>ROS2 python package for supporting Robko01</description>
   <maintainer email="orlin369@gmail.com">user</maintainer>
   <license>Apache License 2.0</license>
 
