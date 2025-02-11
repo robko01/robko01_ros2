@@ -80,7 +80,7 @@
 	<joint type="revolute" name="base">
 		<parent link="base_link" />
 		<child link="torso" />
-		<origin xyz="0.0 0.0 0.150" rpy="0.0 0.0 0.0" />
+		<origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0" />
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
 	</joint>
@@ -106,43 +106,61 @@
 			</material>
 		</visual>
 		<visual name="torso_l">
-			<origin xyz="-0.0385 0.044 0.0" rpy="0.0 0.0 0.0" />
+			<origin xyz="-0.0385 0.040 0.0675" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.167 0.002 0.200"/>
+				<box size="0.167 0.002 0.135"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_6_c">
+			<origin xyz="0.0 0.040 0.150" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="torso_c1">
-			<origin xyz="-0.0385 0.0 -0.060" rpy="0.0 0.0 0.0" />
+			<origin xyz="-0.0385 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.167 0.077 0.002"/>
+				<box size="0.167 0.078 0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="torso_c2">
-			<origin xyz="-0.0385 0.0 -0.100" rpy="0.0 0.0 0.0" />
+			<origin xyz="0.010 0.0 0.060" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.167 0.077 0.002"/>
+				<box size="0.065 0.078 0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="torso_r">
-			<origin xyz="-0.0385 -0.044 0.0" rpy="0.0 0.0 0.0" />
+			<origin xyz="-0.0385 -0.040 0.0675" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.167 0.002 0.200"/>
+				<box size="0.167 0.002 0.135"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_r_c">
+			<origin xyz="0.0 -0.040 0.150" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="m1">
-			<origin xyz="0.0 0.0565 0.0" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="0.0 0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -151,7 +169,7 @@
 			</material>
 		</visual>
 		<visual name="m2">
-			<origin xyz="-0.095 -0.0565 -0.065" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="-0.095 -0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -160,7 +178,7 @@
 			</material>
 		</visual>
 		<visual name="m3">
-			<origin xyz="-0.095 0.0565 -0.065" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="-0.095 0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -169,7 +187,7 @@
 			</material>
 		</visual>
 		<visual name="m4">
-			<origin xyz="-0.025 -0.0565 -0.065" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="-0.025 -0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -178,7 +196,7 @@
 			</material>
 		</visual>
 		<visual name="m5">
-			<origin xyz="-0.025 0.0565 -0.065" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="-0.025 0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -187,7 +205,7 @@
 			</material>
 		</visual>
 		<visual name="m6">
-			<origin xyz="0.0 -0.0565 0.0" rpy="1.5707963705063 0.0 0.0" />
+			<origin xyz="0.0 -0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
 			</geometry>
@@ -199,7 +217,7 @@
 	<joint type="revolute" name="shoulder">
 		<parent link="torso" />
 		<child link="shoulder" />
-		<origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0"/>
+		<origin xyz="0.0 0.0 0.150" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 1.0 0.0" />
 		<limit upper="2.5" lower="-0.8" velocity="3" effort="10" />
 	</joint>
@@ -225,27 +243,45 @@
 			</material>
 		</visual>
 		<visual name="shoulder_l">
-			<origin xyz="0.0 0.039 0.080" rpy="0.0 0.0 0.0" />
+			<origin xyz="0.0 0.039 0.090" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.085 0.002 0.250"/>
+				<box size="0.085 0.002 0.180"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_l_c">
+			<origin xyz="0.0 0.039 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="shoulder_c">
-			<origin xyz="-0.0425 0.0025 0.080" rpy="0.0 0.0 0.0" />
+			<origin xyz="-0.0425 0.0025 0.090" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.002 0.073 0.250"/>
+				<box size="0.002 0.073 0.180"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
 			</material>
 		</visual>
 		<visual name="shoulder_r">
-			<origin xyz="0.0 -0.034 0.080" rpy="0.0 0.0 0.0" />
+			<origin xyz="0.0 -0.034 0.090" rpy="0.0 0.0 0.0" />
 			<geometry>
-				<box size="0.085 0.002 0.250"/>
+				<box size="0.085 0.002 0.180"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_r_c">
+			<origin xyz="0.0 -0.034 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
 			</geometry>
 			<material name="Orange1">
 				<color rgba="0.5 0.2 0.0 1.0"/>
