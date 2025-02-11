@@ -24,8 +24,9 @@ install(PROGRAMS
 )
 
 install(
-  DIRECTORY launch urdf
-  DESTINATION share/${PROJECT_NAME}
+  DIRECTORY launch
+  DIRECTORY urdf
+  DIRECTORY urdf  DESTINATION share/${PROJECT_NAME}
 )
 
 # Register package
