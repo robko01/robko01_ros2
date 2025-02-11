@@ -24,7 +24,7 @@ install(PROGRAMS
 )
 
 install(
-  DIRECOTRY launch urdf
+  DIRECTORY launch urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
