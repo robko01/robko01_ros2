@@ -27,6 +27,7 @@ import os
 import threading
 import queue
 import traceback
+import argparse
 
 import rclpy
 from rclpy.node import Node
@@ -44,7 +45,6 @@ from robko01.utils.actions import Actions
 import serial
 
 class Robko01Service(Node):
-#0889487321 - Manol
 
 #region Attributes
 
@@ -84,14 +84,33 @@ class Robko01Service(Node):
 
 #region Constructor
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super().__init__('robko01_ros2')
-                
-        self.__logger = self.get_logger()
-        self.__logger.info("HOI")
 
-        # Create the action server
+        self.__logger = self.get_logger()
+        self.__logger.info("HOI -> Human Oral Interaction")
+
+        # Declare parameters
+        self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
+        self.declare_parameter('port', 8000)        # Default value is 8000
+        self.declare_parameter('cname', "orlin369")        # Default value is orlin369
+
+        # Get parameter values
+        host = self.get_parameter('host').get_parameter_value().string_value
+        port = self.get_parameter('port').get_parameter_value().integer_value
+        cname = self.get_parameter('cname').get_parameter_value().string_value
+
+        # Manual convert to string.
+        port = str(port)
+
+        # Create the robot controller.
+        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
+        """Controller
+        """
+        self.__controller.connect()
+
+        # Create the action server.
         self._action_server = ActionServer(
             self,
             FollowJointTrajectory,
@@ -101,34 +120,12 @@ class Robko01Service(Node):
             cancel_callback=self.cancel_callback
         )
 
-        self.__joint_state_msg = JointState()
-        """Joint messages.
-        """
-
-        self.__publisher = self.create_publisher(
-            JointState,
-            'joint_states',
-            10)
-        """Publisher
-        """
-
-        self.__pub_timer = ThreadTimer()
-        """Pub timer.
-        """
-        self.__pub_timer.update_rate = 0.1
-        self.__pub_timer.set_cb(self.__pub_worker)
-        self.__pub_timer.start()
-
-        port = "/dev/ttyUSB0"
-        cname = "orlin369"
-        self.__controller = ControllerFactory.create(port=port, cname=cname)
-        """Controller
-        """
-
+        # Create action queue.
         self.__actions_queue = queue.Queue()
         """Actions queue.
         """
 
+        # Create action update timer.
         self.__action_update_timer = ThreadTimer()
         """Action update timer.
         """
@@ -136,19 +133,53 @@ class Robko01Service(Node):
         self.__action_update_timer.set_cb(self.__action_timer_cb)
         self.__action_update_timer.start()
 
+        # Create joint state message.
+        self.__joint_state_msg = JointState()
+        """Joint messages.
+        """
+
+        # Create publisher for joint state message.
+        self.__publisher = self.create_publisher(
+            JointState,
+            'robko01_joint_states',
+            10)
+        """Publisher
+        """
+
+        # Create publisher timer.
+        self.__publisher_timer = ThreadTimer()
+        """Publisher timer.
+        """
+        self.__publisher_timer.update_rate = 0.1
+        self.__publisher_timer.set_cb(self.__pub_worker)
+        self.__publisher_timer.start()
+
     def __del__(self):
 
-        if self.__pub_timer is not None:
-            self.__pub_timer.stop()
-    
+        if self.__publisher_timer is not None:
+            self.__publisher_timer.stop()
+
         if self.__action_update_timer is not None:
             self.__action_update_timer.stop()
-    
+
         self.__logger.info("Double HOI")
 
 #endregion
 
-#region Private Methods (Service Handler)
+#region Public Methods (Node Interface)
+
+    def destroy_node(self):
+
+        # Release the robot resource.
+        if self.__controller is not None:
+            self.__controller.disconnect()
+
+        # Call the base class method to perform the default destruction process
+        super().destroy_node()
+
+#endregion
+
+#region Public Methods (Service Interface)
 
     def goal_callback(self, goal_request):
         # Accept all goals for now
@@ -164,18 +195,16 @@ class Robko01Service(Node):
         feedback_msg = FollowJointTrajectory.Feedback()
 
         for point in goal_handle.request.trajectory.points:
+
+            # TODO: Scale values to some unit in angle speed.
+            # Set velocities and ask controller to made it.
+            int_velocities = [int(x) for x in point.velocities]
+            self.__current_speed[1:12:2] = int_velocities
+            self.__put_action(Actions.UpdateSpeeds)
+
             # Here we just log the points and assume execution happens instantly.
-            self.__logger.info(f'Processing trajectory point: {point.velocities}')
             feedback_msg.actual.positions = point.positions
             feedback_msg.actual.velocities = point.velocities
-
-            for velocity in point.velocities:
-                print(f"Velocity: {velocity}")
-
-            self.__current_speed[1] = int(point.velocities[0])
-            self.__put_action(Actions.UpdateSpeeds)
-            # self.__put_action(Actions.UpdateOutputs)
-
             goal_handle.publish_feedback(feedback_msg)
 
             # Simulate some time delay (in a real robot, you'd move joints here)
@@ -188,45 +217,16 @@ class Robko01Service(Node):
 
 #endregion
 
-#region Private Methods (State Pulisher)
-
-    def __pub_worker(self):
-        # Free-wheeling process: runs in a separate thread
-        while rclpy.ok():
-            # Perform some task periodically (e.g., every 1 second)
-
-            if self.__logger is not None and self.__robot_ready == True:
-                self.__logger.info(f"Current position: {self.__current_position}")
-                self.__logger.info(f"Axis states: {self.__axis_states}")
-                self.__logger.info(f"Port A inputs: {self.__port_a_inputs}")
-
-                # Update time.
-                self.__joint_state_msg.header.stamp = self.get_clock().now().to_msg()
-
-                # Joint names
-                self.__joint_state_msg.name = ['base', 'shoulder', 'elbow', 'ld', 'rd', 'gripper']
-
-                # Joint positions - simple oscillation using sine function
-                self.__joint_state_msg.position = self.__current_position[0::2]
-
-                # Optional: Joint velocity and effort can also be specified
-                self.__joint_state_msg.velocity = self.__current_position[1::2]
-
-
-                self.__publisher.publish(self.__joint_state_msg)
-
-            # Sleep to simulate work and synchronize with ROS2 spin time
-            rclpy.spin_once(self, timeout_sec=1.0)  # Sync with ROS2 spin time
-
-#endregion
-
-#region Private Methods (Action Server)
+#region Private Methods (Robot Action Handler)
 
     def __put_action(self, action):
 
         self.__actions_queue.put(action)
 
     def __do_action(self, action):
+
+        if self.__controller is None:
+            return
 
         if action == Actions.NONE:
             pass
@@ -267,10 +267,41 @@ class Robko01Service(Node):
 
 #endregion
 
+#region Private Methods (State Pulisher)
+
+    def __pub_worker(self):
+        # Free-wheeling process: runs in a separate thread
+        while rclpy.ok():
+            # Perform some task periodically (e.g., every 1 second)
+
+            if self.__logger is not None and self.__robot_ready == True:
+                self.__logger.info(f"Current position: {self.__current_position}")
+                self.__logger.info(f"Axis states: {self.__axis_states}")
+                self.__logger.info(f"Port A inputs: {self.__port_a_inputs}")
+
+                # Update time.
+                self.__joint_state_msg.header.stamp = self.get_clock().now().to_msg()
+
+                # Joint names
+                self.__joint_state_msg.name = ['base', 'shoulder', 'elbow', 'ld', 'rd', 'gripper']
+
+                # Joint positions - simple oscillation using sine function
+                self.__joint_state_msg.position = self.__current_position[0::2]
+
+                # Optional: Joint velocity and effort can also be specified
+                self.__joint_state_msg.velocity = self.__current_position[1::2]
+
+
+                self.__publisher.publish(self.__joint_state_msg)
+
+            # Sleep to simulate work and synchronize with ROS2 spin time
+            rclpy.spin_once(self, timeout_sec=1.0)  # Sync with ROS2 spin time
+
+#endregion
+
+
 def main(args=None):
     rclpy.init(args=args)
-
-    print(sys.argv[1])
 
     robko01_service = Robko01Service()
 
