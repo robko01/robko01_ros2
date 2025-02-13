@@ -51,7 +51,7 @@ setup(
             'state_publisher = robko01_ros2.state_publisher:main'
         ],
     },
-    data_files=[
+    package_data=[
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
         (os.path.join('share', package_name), glob('urdf/*')),
     ],
