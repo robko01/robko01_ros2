@@ -36,6 +36,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/launch', ['launch/display.launch.py']),
         ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
+        ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
