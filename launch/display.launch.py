@@ -61,7 +61,7 @@ def generate_launch_description():
         package='joint_state_publisher',
         executable='joint_state_publisher',
         # name='joint_state_publisher',
-        parameters=[urdf_model_path]
+        parameters=[params]
         # condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
     )
 
@@ -70,7 +70,7 @@ def generate_launch_description():
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
         # name='joint_state_publisher_gui',
-        parameters=[urdf_model_path]
+        parameters=[params]
         # condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     )
 
