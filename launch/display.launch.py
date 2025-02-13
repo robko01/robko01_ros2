@@ -48,21 +48,6 @@ def generate_launch_description():
         'robot_description': urdf_model_content
     }
 
-    #
-    robot_state_publisher_node =launch_ros.actions.Node(
-    package='robot_state_publisher',
-	executable='robot_state_publisher',
-    output='screen',
-    parameters=[params])
-
-    #
-    joint_state_publisher_gui_node = launch_ros.actions.Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
-    )
-
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
         executable='rviz2',
@@ -79,6 +64,22 @@ def generate_launch_description():
         parameters=[params],
         condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
     )
+
+    #
+    joint_state_publisher_gui_node = launch_ros.actions.Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+        condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
+    )
+
+
+    #
+    robot_state_publisher_node =launch_ros.actions.Node(
+    package='robot_state_publisher',
+	executable='robot_state_publisher',
+    output='screen',
+    parameters=[params])
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
