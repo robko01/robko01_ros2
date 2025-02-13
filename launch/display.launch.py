@@ -48,14 +48,6 @@ def generate_launch_description():
         'robot_description': urdf_model_content
     }
 
-    rviz_node = launch_ros.actions.Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        arguments=['-d', rviz_config_path],
-        output='screen'
-    )
-
     #
     joint_state_publisher_node = launch_ros.actions.Node(
         package='joint_state_publisher',
@@ -70,8 +62,8 @@ def generate_launch_description():
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
         name='joint_state_publisher_gui',
-        parameters=[params]
-        # condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
+        parameters=[params],
+        condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     )
 
     #
@@ -81,6 +73,14 @@ def generate_launch_description():
         output='screen',
         parameters=[params])
 
+    rviz_node = launch_ros.actions.Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_path],
+        output='screen'
+    )
+
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
                                             description='This is a flag for joint_state_publisher_gui'),
@@ -88,6 +88,6 @@ def generate_launch_description():
                                             description='Path to the urdf model file'),
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
-        rviz_node,
-        robot_state_publisher_node
+        robot_state_publisher_node,
+        rviz_node
     ])
