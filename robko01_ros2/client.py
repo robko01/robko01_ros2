@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
 
 """
 
-Robko 01 - ROS2 Python Control Software
+Robko 01 - ROS2 Control Software
 
-Copyright (C) [2024] [Orlin Dimitrov]
+Copyright (C) [2025] [Orlin Dimitrov]
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
