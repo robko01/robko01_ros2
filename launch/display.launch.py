@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -48,11 +48,17 @@ def generate_launch_description():
     params = {'robot_description': urdf_model_content}
 
     # Nodes
-    joint_state_publisher_gui_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        parameters=[urdf_model_path],
-        condition=IfCondition(LaunchConfiguration('gui'))
+
+    joint_state_publisher_gui_node = TimerAction(
+        period=2.0,  # Delay to ensure robot_description is published
+        actions=[
+            Node(
+                package='joint_state_publisher_gui',
+                executable='joint_state_publisher_gui',
+                parameters=[params],
+                condition=IfCondition(LaunchConfiguration('gui'))
+            )
+        ]
     )
 
     joint_state_publisher_node = Node(
