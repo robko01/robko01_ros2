@@ -32,11 +32,18 @@ def generate_launch_description():
         name='joint_state_publisher_gui',
         condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     )
-    
+
+    rviz_config_file = os.path.join(
+        pkgPath,
+        'rviz',
+        'defasult.rviz'
+    )
+
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
+        arguments=['-d', rviz_config_file],
         output='screen'
     )
 
