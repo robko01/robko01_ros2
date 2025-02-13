@@ -36,7 +36,7 @@ def generate_launch_description():
     rviz_config_file = os.path.join(
         pkgPath,
         'rviz',
-        'defasult.rviz'
+        'default.rviz'
     )
 
     rviz_node = launch_ros.actions.Node(
