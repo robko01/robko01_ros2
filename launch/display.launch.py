@@ -61,7 +61,7 @@ def generate_launch_description():
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
-        parameters=[params],
+        parameters=[urdf_model_path],
         condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
     )
 
@@ -70,22 +70,23 @@ def generate_launch_description():
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
         name='joint_state_publisher_gui',
+        parameters=[urdf_model_path],
         condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     )
 
     #
     robot_state_publisher_node =launch_ros.actions.Node(
-    package='robot_state_publisher',
-	executable='robot_state_publisher',
-    output='screen',
-    parameters=[params])
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen',
+        parameters=[params])
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
                                             description='This is a flag for joint_state_publisher_gui'),
         launch.actions.DeclareLaunchArgument(name='model', default_value=urdf_model_path,
                                             description='Path to the urdf model file'),
-        # joint_state_publisher_node,
+        joint_state_publisher_node,
         joint_state_publisher_gui_node,
         rviz_node,
         robot_state_publisher_node
