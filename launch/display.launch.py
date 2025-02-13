@@ -4,7 +4,7 @@ import launch_ros
 import os
 
 def generate_launch_description():
-    pkgPath = launch_ros.substitutions.FindPackageShare(package='robko01_ros2').find('robko01_serice')
+    pkgPath = launch_ros.substitutions.FindPackageShare(package='robko01_ros2').find('robko01_service')
     urdfModelPath= os.path.join(pkgPath, 'urdf/robko01.urdf')
     
     with open(urdfModelPath,'r') as infp:
