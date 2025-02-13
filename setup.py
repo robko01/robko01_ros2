@@ -24,7 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import find_packages, setup
 import os
-import glob
 
 package_name = 'robko01_ros2'
 
@@ -35,8 +34,7 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
-        (os.path.join('share', package_name), glob('urdf/*')),
+        ('share/' + package_name, ['urdf/*']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
