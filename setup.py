@@ -51,10 +51,10 @@ setup(
             'state_publisher = robko01_ros2.state_publisher:main'
         ],
     },
-    package_data=[
+    package_data={
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
         (os.path.join('share', package_name), glob('urdf/*')),
-    ],
+    },
     # Use the new-style development mode
     # cmdclass={
     #     'develop': 'setuptools.command.develop.develop',
