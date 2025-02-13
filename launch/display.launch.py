@@ -55,7 +55,7 @@ def generate_launch_description():
             Node(
                 package='joint_state_publisher_gui',
                 executable='joint_state_publisher_gui',
-                parameters=[params],
+                parameters=[urdf_model_path],
                 condition=IfCondition(LaunchConfiguration('gui'))
             )
         ]
