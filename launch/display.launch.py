@@ -49,16 +49,11 @@ def generate_launch_description():
 
     # Nodes
 
-    joint_state_publisher_gui_node = TimerAction(
-        # period=2.0,  # Delay to ensure robot_description is published
-        actions=[
-            Node(
-                package='joint_state_publisher_gui',
-                executable='joint_state_publisher_gui',
-                parameters=[urdf_model_path],
-                condition=IfCondition(LaunchConfiguration('gui'))
-            )
-        ]
+    joint_state_publisher_gui_node = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        parameters=[urdf_model_path],
+        condition=IfCondition(LaunchConfiguration('gui'))
     )
 
     joint_state_publisher_node = Node(
