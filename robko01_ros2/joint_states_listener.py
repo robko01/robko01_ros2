@@ -60,7 +60,7 @@ class JointStatesListener(Node):
         """Subscription topic.
         """
 
-        self.__rate = 10
+        self.__rate = 1
         """Update rate.
         """        
 
