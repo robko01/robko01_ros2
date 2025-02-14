@@ -49,6 +49,7 @@ setup(
         'console_scripts': [
             'service = robko01_ros2.service:main',
             'client = robko01_ros2.client:main',
+            'joint_states_listener = robko01_ros2.joint_states_listener:main',
             'state_publisher = robko01_ros2.state_publisher:main'
         ],
     },
