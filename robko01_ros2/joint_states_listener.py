@@ -52,7 +52,7 @@ class JointStatesListener(Node):
 
         super().__init__('joint_states_listener')
 
-        self.__conversion_table_rad = [1125, 1125, 672, 241, 241]
+        self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1]
         """Conversion tables from radians to steps.
         """
 
