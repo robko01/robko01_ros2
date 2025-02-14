@@ -45,20 +45,55 @@ import serial
 
 class JointStatesListener(Node):
 
+#region Constructor
     def __init__(self):
-        super().__init__('joint_states_listener')
-        self.subscription = self.create_subscription(
-            JointState,
-            '/joint_states',
-            self.listener_callback,
-            10)
-        self.subscription  # prevent unused variable warning
+        """Constructor
+        """
 
-    def listener_callback(self, msg):
+        super().__init__('joint_states_listener')
+
+        self.__conversion_table_rad = [1125, 1125, 672, 241, 241]
+        """Conversion tables from radians to steps.
+        """
+
+        self.__topic = "/joint_states"
+        """Subscription topic.
+        """
+
+        self.__rate = 10
+        """Update rate.
+        """        
+
+        # Subscription
+        self.__subscription = self.create_subscription(
+            JointState,
+            self.__topic,
+            self._listener_callback,
+            self.__rate)
+
+        # prevent unused variable warning
+        self.__subscription
+#endregion
+
+#region Protected Methods
+    def _radians_to_steps(self, radians_list):
+        result = []
+        for key, value in enumerate(radians_list):
+            result.append(int(self.__conversion_table_rad[key]*value))
+        return result
+
+    def _listener_callback(self, msg):
         angles = msg.position[0:6]
-        self.get_logger().info(f'{angles}')
+        steps = self._radians_to_steps(angles)
+        self.get_logger().info(f'{steps}')
+#endregion
 
 def main(args=None):
+    """Main function.
+    """
+
+    joint_states_listener = None
+
     try:
         rclpy.init(args=args)
         joint_states_listener = JointStatesListener()
@@ -66,8 +101,9 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     finally:
-        joint_states_listener.destroy_node()
-        # rclpy.shutdown()
+        if joint_states_listener is not None:
+            joint_states_listener.destroy_node()
+            # rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
