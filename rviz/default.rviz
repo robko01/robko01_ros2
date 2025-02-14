@@ -49,6 +49,14 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: base_link
       Value: true
+    - Class: rviz_default_plugins/RobotModel
+      Alpha: 1.0
+      Robot Description: /robot_description
+      Description Source: Topic
+      Enabled: true
+      Name: RobotModel
+      TF Prefix: ""
+      Update Rate: 0
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
