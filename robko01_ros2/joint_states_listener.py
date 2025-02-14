@@ -58,20 +58,16 @@ class JointStatesListener(Node):
         angles = msg.position[0:6]
         self.get_logger().info(f'{angles}')
 
-
 def main(args=None):
-    rclpy.init(args=args)
-
-    joint_states_listener = JointStatesListener()
-
-    rclpy.spin(joint_states_listener)
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    joint_states_listener.destroy_node()
-    rclpy.shutdown()
-
+    try:
+        rclpy.init(args=args)
+        joint_states_listener = JointStatesListener()
+        rclpy.spin(joint_states_listener)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        joint_states_listener.destroy_node()
+        # rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
