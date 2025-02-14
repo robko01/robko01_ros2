@@ -55,8 +55,8 @@ class JointStatesListener(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        angles = msg.position[0:5]
-        self.get_logger().info(f'I heard: {angles}')
+        angles = msg.position[0:6]
+        self.get_logger().info(f'{angles}')
 
 
 def main(args=None):
