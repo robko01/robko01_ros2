@@ -246,6 +246,9 @@ class JointStatesListener(Node):
 
     def destroy_node(self):
 
+        if self.__action_update_timer is not None:
+            self.__action_update_timer.stop()
+
         # Release the robot resource.
         if self.__controller is not None:
             self.__controller.disconnect()
