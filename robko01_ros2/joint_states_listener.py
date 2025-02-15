@@ -96,7 +96,7 @@ class JointStatesListener(Node):
         """Subscription topic.
         """
 
-        self.__rate = 10
+        self.__rate = 1
         """Update rate.
         """        
 
@@ -119,10 +119,7 @@ class JointStatesListener(Node):
 
     def __del__(self):
 
-        if self.__action_update_timer is not None:
-            self.__action_update_timer.stop()
-
-        self.__logger.info("Double HOI")
+        self.destroy_node()
 
 #endregion
 
