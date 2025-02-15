@@ -96,7 +96,7 @@ class JointStatesListener(Node):
         """Subscription topic.
         """
 
-        self.__rate = 1
+        self.__rate = 10
         """Update rate.
         """        
 
@@ -104,7 +104,10 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__prescale_counter = 10
+        self.__prescale_count = 20
+
+
+        self.__prescale_counter = self.__prescale_count
 
         self.__actions_queue = queue.Queue()
         """Actions queue.
@@ -142,6 +145,7 @@ class JointStatesListener(Node):
         # Create the robot controller.
         self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
         self.__controller.connect()
+        self.__controller.enable()
 
 #endregion
 
@@ -160,7 +164,6 @@ class JointStatesListener(Node):
             pass
 
         if action == Actions.UpdateAbsolutePositions:
-            self.__controller.enable()
             self.__controller.move_absolute(self.__set_position)
             self.__logger.info(f'{self.__set_position}')
 
@@ -214,7 +217,7 @@ class JointStatesListener(Node):
         if self.__prescale_counter > 0:
             self.__prescale_counter -= 1
         else:
-            self.__prescale_counter == 10
+            self.__prescale_counter == self.__prescale_count
             angles = msg.position[0:6]
             steps = self.__radians_to_steps(angles)
             self.__set_position[0:12:2] = steps
