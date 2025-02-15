@@ -114,6 +114,13 @@ class JointStatesListener(Node):
         """Action update timer.
         """
 
+    def __del__(self):
+
+        if self.__action_update_timer is not None:
+            self.__action_update_timer.stop()
+
+        self.__logger.info("Double HOI")
+
 #endregion
 
 #region Private Methods (Controller)
@@ -155,6 +162,8 @@ class JointStatesListener(Node):
         if action == Actions.UpdateAbsolutePositions:
             self.__controller.enable()
             self.__controller.move_absolute(self.__set_position)
+            self.__logger.info(f'{self.__set_position}')
+
 
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
@@ -202,14 +211,13 @@ class JointStatesListener(Node):
         return result
 
     def __listener_callback(self, msg):
-        angles = msg.position[0:6]
-        steps = self.__radians_to_steps(angles)
-        self.__current_speed[0:12:2] = steps
-        self.get_logger().info(f'{self.__current_speed}')
         if self.__prescale_counter > 0:
             self.__prescale_counter -= 1
         else:
             self.__prescale_counter == 10
+            angles = msg.position[0:6]
+            steps = self.__radians_to_steps(angles)
+            self.__set_position[0:12:2] = steps
             self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
@@ -232,6 +240,14 @@ class JointStatesListener(Node):
         self.__init_action_timer()
         self.__init_joint_listener()
 
+    def destroy_node(self):
+
+        # Release the robot resource.
+        if self.__controller is not None:
+            self.__controller.disconnect()
+
+        # Call the base class method to perform the default destruction process
+        super().destroy_node()
 #endregion
 
 def main(args=None):
