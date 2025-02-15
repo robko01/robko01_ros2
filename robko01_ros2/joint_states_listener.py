@@ -104,7 +104,7 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__prescale_count = 20
+        self.__prescale_count = 10
 
 
         self.__prescale_counter = self.__prescale_count
@@ -199,7 +199,7 @@ class JointStatesListener(Node):
             self.__logger.error(traceback.format_exc())
 
     def __init_action_timer(self):
-        self.__action_update_timer.update_rate = 1000
+        self.__action_update_timer.update_rate = 100
         self.__action_update_timer.set_cb(self.__action_timer_cb)
         self.__action_update_timer.start()
 
