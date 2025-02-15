@@ -104,7 +104,7 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__prescale_count = 20
+        self.__prescale_count = 30
 
 
         self.__prescale_counter = self.__prescale_count
