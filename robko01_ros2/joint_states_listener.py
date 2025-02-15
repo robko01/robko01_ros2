@@ -218,11 +218,11 @@ class JointStatesListener(Node):
             self.__prescale_counter -= 1
         else:
             self.__prescale_counter == self.__prescale_count
-            angles = msg.position[0:6]
-            steps = self.__radians_to_steps(angles)
-            self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [50, 50, 50, 50, 50, 50]
-            self.__put_action(Actions.UpdateAbsolutePositions)
+        angles = msg.position[0:6]
+        steps = self.__radians_to_steps(angles)
+        self.__set_position[0:12:2] = steps
+        self.__set_position[1:12:2] = [50, 50, 50, 50, 50, 50]
+        self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
         # Subscription
