@@ -104,6 +104,8 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
+        self.__angles = None
+
         self.__prescale_count = 10
 
 
@@ -211,11 +213,14 @@ class JointStatesListener(Node):
         return result
 
     def __listener_callback(self, msg):
-        if self.__prescale_counter > 0:
-            self.__prescale_counter -= 1
-        else:
-            self.__prescale_counter == self.__prescale_count
-            angles = msg.position[0:6]
+        # if self.__prescale_counter > 0:
+        #     self.__prescale_counter -= 1
+        # else:
+        #     self.__prescale_counter == self.__prescale_count
+
+        angles = msg.position[0:6]
+        if self.__angles != angles:
+            self.__angles = angles
             steps = self.__radians_to_steps(angles)
             self.__set_position[0:12:2] = steps
             self.__set_position[1:12:2] = [50, 50, 50, 50, 50, 50]
