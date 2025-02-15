@@ -104,6 +104,8 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
+        self.__prescale_counter = 10
+
         self.__actions_queue = queue.Queue()
         """Actions queue.
         """
@@ -204,7 +206,11 @@ class JointStatesListener(Node):
         steps = self.__radians_to_steps(angles)
         self.__current_speed[0:12:2] = steps
         self.get_logger().info(f'{self.__current_speed}')
-        # self.__put_action(Actions.UpdateAbsolutePositions)
+        if self.__prescale_counter > 0:
+            self.__prescale_counter -= 1
+        else:
+            self.__prescale_counter == 10
+            self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
         # Subscription
