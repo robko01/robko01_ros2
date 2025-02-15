@@ -202,7 +202,7 @@ class JointStatesListener(Node):
     def __listener_callback(self, msg):
         angles = msg.position[0:6]
         steps = self.__radians_to_steps(angles)
-        self.__current_speed[1:12:2] = steps
+        self.__current_speed[1:12:1] = steps
         self.get_logger().info(f'{self.__current_speed}')
         # self.__put_action(Actions.UpdateAbsolutePositions)
 
