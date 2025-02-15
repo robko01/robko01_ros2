@@ -196,7 +196,7 @@ class JointStatesListener(Node):
             self.__logger.error(traceback.format_exc())
 
     def __init_action_timer(self):
-        self.__action_update_timer.update_rate = 100
+        self.__action_update_timer.update_rate = 1
         self.__action_update_timer.set_cb(self.__action_timer_cb)
         self.__action_update_timer.start()
 
