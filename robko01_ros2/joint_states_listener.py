@@ -104,6 +104,8 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
+        self.__speed = 100
+
         self.__angles = None
 
         self.__prescale_count = 10
@@ -223,7 +225,7 @@ class JointStatesListener(Node):
             self.__angles = angles
             steps = self.__radians_to_steps(angles)
             self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [50, 50, 50, 50, 50, 50]
+            self.__set_position[1:12:2] = [self.__speed, self.__speed, self.__speed, self.__speed, self.__speed, self.__speed]
             self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
