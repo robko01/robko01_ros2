@@ -46,14 +46,50 @@ import serial
 class JointStatesListener(Node):
 
 #region Constructor
+
     def __init__(self):
         """Constructor
         """
 
         super().__init__('joint_states_listener')
 
+        self.__logger = self.get_logger()
+        self.__logger.info("HOI -> Human Oral Interaction")
+
         self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1]
         """Conversion tables from radians to steps.
+        """
+
+        self.__controller = None
+        """Controller instance.
+        """        
+
+        self.__set_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        """Set position.
+        """        
+
+        self.__current_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        """Current position.
+        """
+
+        self.__current_speed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        """Axis speeds.
+        """
+
+        self.__axis_states = 0
+        """Axis action states.
+        """
+
+        self.__port_a_inputs = 0
+        """Port A inputs.
+        """
+
+        self.__port_a_outputs = 0
+        """Port A outputs.
+        """
+
+        self.__robot_ready = False
+        """Robot ready flag.
         """
 
         self.__topic = "/joint_states"
@@ -64,28 +100,132 @@ class JointStatesListener(Node):
         """Update rate.
         """        
 
-        # Subscription
-        self.__subscription = self.create_subscription(
-            JointState,
-            self.__topic,
-            self._listener_callback,
-            self.__rate)
+        self.__subscription = None
+        """Subscription instance.
+        """        
 
-        # prevent unused variable warning
-        self.__subscription
+        self.__actions_queue = queue.Queue()
+        """Actions queue.
+        """
+
+        self.__action_update_timer = ThreadTimer()
+        """Action update timer.
+        """
+
 #endregion
 
-#region Protected Methods
-    def _radians_to_steps(self, radians_list):
+#region Private Methods (Controller)
+
+    def __init_controller(self):
+        # Declare parameters
+        self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
+        self.declare_parameter('port', 8000)        # Default value is 8000
+        self.declare_parameter('cname', "orlin369")        # Default value is orlin369
+
+        # Get parameter values
+        host = self.get_parameter('host').get_parameter_value().string_value
+        port = self.get_parameter('port').get_parameter_value().integer_value
+        cname = self.get_parameter('cname').get_parameter_value().string_value
+
+        # Manual convert to string.
+        port = str(port)
+
+        # Create the robot controller.
+        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
+        self.__controller.connect()
+
+#endregion
+
+#region Private Methods (Robot Action Handler)
+
+    def __put_action(self, action):
+
+        self.__actions_queue.put(action)
+
+    def __do_action(self, action):
+
+        if self.__controller is None:
+            return
+
+        if action == Actions.NONE:
+            pass
+
+        if action == Actions.UpdateAbsolutePositions:
+            self.__controller.enable()
+            self.__controller.move_absolute(self.__set_position)
+
+        elif action == Actions.UpdateOutputs:
+            self.__controller.set_outputs(self.__port_a_outputs)
+
+        elif action == Actions.ClearController:
+            self.__controller.clear()
+
+        elif action == Actions.ResetController:
+            pass
+
+    def __action_timer_cb(self):
+
+        try:
+            self.__axis_states = self.__controller.is_moving()
+            self.__current_position = self.__controller.current_position()
+            self.__port_a_inputs = self.__controller.get_inputs()
+
+            if not self.__actions_queue.empty():
+                action = self.__actions_queue.get()
+                self.__do_action(action)
+
+            self.__robot_ready = True
+
+        except serial.serialutil.SerialException as exc:
+            self.__robot_ready = False
+            self.__logger.error(exc)
+
+        except Exception as exc:
+            self.__robot_ready = False
+            self.__logger.error(traceback.format_exc())
+
+    def __init_action_timer(self):
+        self.__action_update_timer.update_rate = 0.5
+        self.__action_update_timer.set_cb(self.__action_timer_cb)
+        self.__action_update_timer.start()
+
+#endregion
+
+#region Private Methods (Listener)
+
+    def __radians_to_steps(self, radians_list):
         result = []
         for key, value in enumerate(radians_list):
             result.append(int(self.__conversion_table_rad[key]*value))
         return result
 
-    def _listener_callback(self, msg):
+    def __listener_callback(self, msg):
         angles = msg.position[0:6]
-        steps = self._radians_to_steps(angles)
-        self.get_logger().info(f'{steps}')
+        steps = self.__radians_to_steps(angles)
+        self.__current_speed[1:12:2] = steps
+        self.get_logger().info(f'{self.__current_speed[1:12:2]}')
+        # self.__put_action(Actions.UpdateAbsolutePositions)
+
+    def __init_joint_listener(self):
+        # Subscription
+        self.__subscription = self.create_subscription(
+            JointState,
+            self.__topic,
+            self.__listener_callback,
+            self.__rate)
+
+        # prevent unused variable warning
+        self.__subscription
+
+#endregion
+
+#region Public Methods
+
+    def init(self):
+        self.__init_controller()
+        self.__init_action_timer()
+        self.__init_joint_listener()
+
 #endregion
 
 def main(args=None):
@@ -97,6 +237,7 @@ def main(args=None):
     try:
         rclpy.init(args=args)
         joint_states_listener = JointStatesListener()
+        joint_states_listener.init()
         rclpy.spin(joint_states_listener)
     except KeyboardInterrupt:
         pass
