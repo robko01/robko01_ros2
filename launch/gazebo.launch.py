@@ -33,12 +33,10 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    # Path to the package.
-    package_name = 'robko01_ros2'
-    package_path = FindPackageShare(package=package_name).find(package_name)
-
-    # Path to the URDF model.
-    urdf_model_path = os.path.join(package_path, 'urdf', 'robko01.urdf')
+    # Paths
+    urdf_file = PathJoinSubstitution(
+        [FindPackageShare('robko01_ros2'), 'urdf', 'robko01.urdf']
+    )
 
     # Launch Gazebo
     gazebo = IncludeLaunchDescription(
