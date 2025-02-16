@@ -220,17 +220,17 @@ class JointStatesListener(Node):
         if self.__angles != angles:
             self.__angles = angles
 
-            # Differentials inverse model.
-            q4 = angles[4] + angles[3]
-            q5 = angles[4] - angles[3]
-            angles[3] = q4
-            angles[4] = q5
-
-            # Grip[per compensation.
-            angles[5] = angles[5] + angles[2]
-
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
+
+            # Differentials inverse model.
+            q4 = steps[4] + steps[3]
+            q5 = steps[4] - steps[3]
+            steps[3] = q4
+            steps[4] = q5
+
+            # Grip[per compensation.
+            steps[5] = steps[5] + steps[2]
 
             # Apply the position.
             self.__set_position[0:12:2] = steps
