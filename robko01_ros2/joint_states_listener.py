@@ -51,7 +51,7 @@ class JointStatesListener(Node):
         """Constructor
         """
 
-        super().__init__('joint_states_listener')
+        super().__init__('robko01_joint_states_listener')
 
         self.__logger = self.get_logger()
         self.__logger.info("HOI -> Human Oral Interaction")
