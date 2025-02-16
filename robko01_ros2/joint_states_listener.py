@@ -105,7 +105,7 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__speed = 70
+        self.__speed = 50
         """Default constant speed.
         """        
 
