@@ -226,16 +226,18 @@ class JointStatesListener(Node):
             # P compensation.
             angles[3] = angles[3] + angles[2]
 
+            # Differentials inverse model.
+            q4 = angles[4] + angles[3]
+            q5 = angles[4] - angles[3]
+            angles[3] = q4
+            angles[4] = q5
+
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
-            # Differentials inverse model.
-            q4 = steps[4] + steps[3]
-            q5 = steps[4] - steps[3]
-            steps[3] = q4
-            steps[4] = q5
-
             # Gripper compensation.
+            # In steps is essayer because
+            # ration between elbow and gripper is 1:1.
             steps[5] = steps[5] - steps[2]
 
             # Apply the position.
