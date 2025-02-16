@@ -220,11 +220,11 @@ class JointStatesListener(Node):
         if self.__angles != angles:
             self.__angles = angles
 
+            # Elbow compensation.
+            angles[2] = angles[2] + angles[1]
+
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
-
-            # Elbow compensation.
-            steps[2] = steps[2] + steps[1]
 
             # Differentials inverse model.
             q4 = steps[4] + steps[3]
