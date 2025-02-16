@@ -41,7 +41,7 @@ def generate_launch_description():
     # Launch Gazebo
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [FindPackageShare('gazebo_ros'), '/launch', '/gazebo_launch.py']
+            [FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']
         )
     )
 
