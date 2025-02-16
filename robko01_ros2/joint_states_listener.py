@@ -223,6 +223,9 @@ class JointStatesListener(Node):
             # Elbow compensation.
             angles[2] = angles[2] + angles[1]
 
+            # P compensation.
+            angles[3] = angles[3] + angles[1]
+
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
@@ -233,7 +236,7 @@ class JointStatesListener(Node):
             steps[4] = q5
 
             # Gripper compensation.
-            steps[5] = steps[5] + steps[2]
+            steps[5] = steps[5] - steps[2]
 
             # Apply the position.
             self.__set_position[0:12:2] = steps
