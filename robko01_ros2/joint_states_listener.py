@@ -224,6 +224,15 @@ class JointStatesListener(Node):
         if self.__angles != angles:
             self.__angles = angles
             steps = self.__radians_to_steps(angles)
+
+            # Differentials
+            q4 = steps[3] + steps[4]
+            q5 = steps[3] - steps[4]
+
+            # Set points
+            steps[3] = q4
+            steps[4] = q5
+
             self.__set_position[0:12:2] = steps
             self.__set_position[1:12:2] = [self.__speed, self.__speed, self.__speed, self.__speed, self.__speed, self.__speed]
             self.__put_action(Actions.UpdateAbsolutePositions)
