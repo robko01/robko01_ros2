@@ -51,12 +51,13 @@ class JointStatesListener(Node):
         """Constructor
         """
 
-        super().__init__('joint_states_listener')
+        super().__init__('robko01_joint_states_listener')
 
         self.__logger = self.get_logger()
         self.__logger.info("HOI -> Human Oral Interaction")
 
-        self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1]
+        # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Original
+        self.__conversion_table_rad = [544, 544, 325, 130, 130, 1] # Compensated because of the motors controllers settings.
         """Conversion tables from radians to steps.
         """
 
@@ -104,14 +105,13 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__speed = 100
+        self.__speed = 70
+        """Default constant speed.
+        """        
 
         self.__angles = None
-
-        self.__prescale_count = 10
-
-
-        self.__prescale_counter = self.__prescale_count
+        """Angles of the robot.
+        """
 
         self.__actions_queue = queue.Queue()
         """Actions queue.
@@ -215,17 +215,28 @@ class JointStatesListener(Node):
         return result
 
     def __listener_callback(self, msg):
-        # if self.__prescale_counter > 0:
-        #     self.__prescale_counter -= 1
-        # else:
-        #     self.__prescale_counter == self.__prescale_count
 
         angles = msg.position[0:6]
         if self.__angles != angles:
             self.__angles = angles
+
+            # Convert to steps.
             steps = self.__radians_to_steps(angles)
+
+            # Differentials inverse model.
+            q4 = steps[4] + steps[3]
+            q5 = steps[4] - steps[3]
+            steps[3] = q4
+            steps[4] = q5
+
+            # Grip[per compensation.
+            steps[5] = steps[5] + steps[2]
+
+            # Apply the position.
             self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [self.__speed, self.__speed, self.__speed, self.__speed, self.__speed, self.__speed]
+            self.__set_position[1:12:2] = [self.__speed]*6
+
+            # Go to position.
             self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
