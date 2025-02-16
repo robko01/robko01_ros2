@@ -57,7 +57,7 @@ class JointStatesListener(Node):
         self.__logger.info("HOI -> Human Oral Interaction")
 
         # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Original
-        self.__conversion_table_rad = [544, 544, 325, 130, 130, 1] # Compensated because of the motors controllers settings.
+        self.__conversion_table_rad = [544, 544, 325, 140, 140, 150] # Compensated because of the motors controllers settings.
         """Conversion tables from radians to steps.
         """
 
@@ -105,7 +105,7 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__speed = 70
+        self.__speed = 50
         """Default constant speed.
         """        
 
@@ -168,7 +168,6 @@ class JointStatesListener(Node):
             self.__controller.move_absolute(self.__set_position)
             self.__logger.info(f'{self.__set_position}')
 
-
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
 
@@ -220,17 +219,25 @@ class JointStatesListener(Node):
         if self.__angles != angles:
             self.__angles = angles
 
+            # Elbow compensation.
+            angles[2] = angles[2] + angles[1]
+
+            # P compensation.
+            angles[3] = angles[3] + angles[2]
+
+            # Differentials inverse model.
+            q4 = angles[4] + angles[3]
+            q5 = angles[4] - angles[3]
+            angles[3] = q4
+            angles[4] = q5
+
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
-            # Differentials inverse model.
-            q4 = steps[4] + steps[3]
-            q5 = steps[4] - steps[3]
-            steps[3] = q4
-            steps[4] = q5
-
-            # Grip[per compensation.
-            steps[5] = steps[5] + steps[2]
+            # Gripper compensation.
+            # In steps is essayer because
+            # ration between elbow and gripper is 1:1.
+            steps[5] = steps[5] - steps[2]
 
             # Apply the position.
             self.__set_position[0:12:2] = steps
