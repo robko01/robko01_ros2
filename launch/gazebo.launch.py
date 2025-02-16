@@ -51,7 +51,7 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=[
             '-entity', 'robko01',
-            '-file', urdf_model_path,
+            '-file', urdf_file,
             '-x', '0',
             '-y', '0',
             '-z', '0.5',
