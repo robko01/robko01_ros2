@@ -223,13 +223,16 @@ class JointStatesListener(Node):
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
+            # Elbow compensation.
+            steps[2] = steps[2] + steps[1]
+
             # Differentials inverse model.
             q4 = steps[4] + steps[3]
             q5 = steps[4] - steps[3]
             steps[3] = q4
             steps[4] = q5
 
-            # Grip[per compensation.
+            # Gripper compensation.
             steps[5] = steps[5] + steps[2]
 
             # Apply the position.
