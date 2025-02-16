@@ -397,15 +397,6 @@
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
-		<visual name="p_l_c">
-			<origin xyz="0.0 0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
-			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
-			</geometry>
-			<material name="Gray1">
-				<color rgba="0.2 0.2 0.2 1.0"/>
-			</material>
-		</visual>
 		<visual name="p_c_c">
 			<origin xyz="0.0125 0.0 0.000" rpy="0.0 1.5707963705063 0.0" />
 			<geometry>
@@ -460,6 +451,15 @@
 			</geometry>
 			<material name="Gray1">
 				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+		<visual name="p_l_c">
+			<origin xyz="0.0 0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
 	</link>
