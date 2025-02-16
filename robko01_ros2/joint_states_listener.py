@@ -104,14 +104,13 @@ class JointStatesListener(Node):
         """Subscription instance.
         """        
 
-        self.__speed = 100
+        self.__speed = 70
+        """Default constant speed.
+        """        
 
         self.__angles = None
-
-        self.__prescale_count = 10
-
-
-        self.__prescale_counter = self.__prescale_count
+        """Angles of the robot.
+        """
 
         self.__actions_queue = queue.Queue()
         """Actions queue.
@@ -215,26 +214,25 @@ class JointStatesListener(Node):
         return result
 
     def __listener_callback(self, msg):
-        # if self.__prescale_counter > 0:
-        #     self.__prescale_counter -= 1
-        # else:
-        #     self.__prescale_counter == self.__prescale_count
 
         angles = msg.position[0:6]
         if self.__angles != angles:
             self.__angles = angles
+
+            # Differentials inverse model.
+            q4 = angles[4] + angles[3]
+            q5 = angles[4] - angles[3]
+            angles[3] = q4
+            angles[4] = q5
+
+            # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
-            # Differentials
-            q4 = steps[4] + steps[3]
-            q5 = steps[4] - steps[3]
-
-            # Set points
-            steps[3] = q4
-            steps[4] = q5
-
+            # Apply the position.
             self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [self.__speed, self.__speed, self.__speed, self.__speed, self.__speed, self.__speed]
+            self.__set_position[1:12:2] = [self.__speed]*6
+
+            # Go to position.
             self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
