@@ -224,7 +224,7 @@ class JointStatesListener(Node):
             angles[2] = angles[2] + angles[1]
 
             # P compensation.
-            angles[3] = angles[3] + angles[1]
+            angles[3] = angles[3] + angles[2]
 
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
