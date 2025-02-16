@@ -168,7 +168,6 @@ class JointStatesListener(Node):
             self.__controller.move_absolute(self.__set_position)
             self.__logger.info(f'{self.__set_position}')
 
-
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
 
