@@ -226,8 +226,8 @@ class JointStatesListener(Node):
             steps = self.__radians_to_steps(angles)
 
             # Differentials
-            q4 = steps[3] + steps[4]
-            q5 = steps[3] - steps[4]
+            q4 = steps[3] - steps[4]
+            q5 = steps[3] + steps[4]
 
             # Set points
             steps[3] = q5
