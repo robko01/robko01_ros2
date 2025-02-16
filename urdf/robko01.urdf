@@ -367,7 +367,7 @@
 		<child link="p" />
 		<origin xyz="0.1778 0.0 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 1.0 0.0" />
-		<limit upper="1.0" lower="-1.5707963705063" velocity="3" effort="10" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
 	</joint>
 	<link name="p">
 		<visual name="p_axis">
