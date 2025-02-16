@@ -226,6 +226,9 @@ class JointStatesListener(Node):
             angles[3] = q4
             angles[4] = q5
 
+            # Grip[per compensation.
+            angles[5] = angles[5] + angles[2]
+
             # Convert to steps.
             steps = self.__radians_to_steps(angles)
 
