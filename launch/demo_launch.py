@@ -18,9 +18,11 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 """
 
 import os
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.conditions import IfCondition, UnlessCondition
@@ -83,11 +85,11 @@ def generate_launch_description():
         output='screen'
     )
 
-    rviz_node = Node(
+    joint_states_listener_node = Node(
         package=package_name,
-        executable='joint_states_listener.py',
+        executable='joint_states_listener',  # No .py extension
         name='joint_states_listener',
-        arguments=['--ros-args', '--param', 'host:=172.33.1.104', '--param port:=10182'],
+        arguments=['--ros-args', '--param', 'host:=172.33.1.104', '--param', 'port:=10182'],
         output='screen'
     )
 
@@ -97,5 +99,6 @@ def generate_launch_description():
         joint_state_publisher_gui_node,
         joint_state_publisher_node,
         robot_state_publisher_node,
-        rviz_node
+        rviz_node,
+        joint_states_listener_node
     ])
