@@ -207,6 +207,14 @@ class JointStatesListener(Node):
 
 #region Private Methods (Listener)
 
+    def __calc_speeds(self, steps, speed):
+        speeds = steps
+        max_pos = min(steps)
+        for index, step in enumerate(steps):
+            speeds[index] = (steps[index] * speed) / max_pos
+            speeds[index] = abs(speeds[index])
+        return speeds
+
     def __radians_to_steps(self, radians_list):
         result = []
         for key, value in enumerate(radians_list):
@@ -241,7 +249,7 @@ class JointStatesListener(Node):
 
             # Apply the position.
             self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [self.__speed]*6
+            self.__set_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
 
             # Go to position.
             self.__put_action(Actions.UpdateAbsolutePositions)
