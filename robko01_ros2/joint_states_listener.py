@@ -217,7 +217,8 @@ class JointStatesListener(Node):
         if min_pos <= 0:
             min_pos = 1
         for index, step in enumerate(steps):
-            speeds[index] = scale(speeds[index], min_pos, max_pos, 5, 50)
+            speeds[index] = speeds[index] / speed
+            # speeds[index] = scale(speeds[index], min_pos, max_pos, 5, 50)
             # speeds[index] = (steps[index] * speed) / max_pos
             speeds[index] = abs(speeds[index])
             speeds[index] = int(speeds[index])
