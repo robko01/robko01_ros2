@@ -213,6 +213,8 @@ class JointStatesListener(Node):
         for index, step in enumerate(steps):
             speeds[index] = (steps[index] * speed) / max_pos
             speeds[index] = abs(speeds[index])
+            speeds[index] = int(speeds[index])
+            
         return speeds
 
     def __radians_to_steps(self, radians_list):
