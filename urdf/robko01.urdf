@@ -216,7 +216,7 @@
 		<visual name="base_dynamic">
 			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
-			<mesh filename="package://robko01_ros2/meshes/base_dynamic.stl" scale="0.001 0.001 0.001"/>
+			<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 			<material name="Gray1">
 				<color rgba="0.2 0.2 0.2 1.0"/>
