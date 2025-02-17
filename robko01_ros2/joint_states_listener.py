@@ -213,7 +213,7 @@ class JointStatesListener(Node):
         max_pos = max(steps)
         min_pos = min(steps)
         if max_pos <= 0:
-            max_pos = 1
+            max_pos = 2
         if min_pos <= 0:
             min_pos = 1
         for index, step in enumerate(steps):
