@@ -37,7 +37,7 @@ setup(
         ('share/' + package_name + '/launch', ['launch/demo_launch.py', 'launch/gazebo_launch.py', 'launch/rviz_launch.py']),
         ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
         ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
-        ('share/' + package_name + '/meshes', ['meshes/base_dynamic.stl']),
+        ('share/' + package_name + '/meshes', ['meshes/base_dynamic.STL']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
