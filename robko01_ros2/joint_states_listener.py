@@ -210,6 +210,8 @@ class JointStatesListener(Node):
     def __calc_speeds(self, steps, speed):
         speeds = steps
         max_pos = min(steps)
+        if max_pos <= 0:
+            max_pos = 1
         for index, step in enumerate(steps):
             speeds[index] = (steps[index] * speed) / max_pos
             speeds[index] = abs(speeds[index])
