@@ -209,20 +209,24 @@ class JointStatesListener(Node):
 #region Private Methods (Listener)
 
     def __calc_speeds(self, steps, speed):
+
         speeds = steps
         max_pos = max(steps)
         min_pos = min(steps)
+
         if max_pos <= 0:
             max_pos = 2
+
         if min_pos <= 0:
             min_pos = 1
+
         for index, step in enumerate(steps):
             speeds[index] = speeds[index] / speed
             # speeds[index] = scale(speeds[index], min_pos, max_pos, 5, 50)
             # speeds[index] = (steps[index] * speed) / max_pos
             speeds[index] = abs(speeds[index])
             speeds[index] = int(speeds[index])
-            
+
         return speeds
 
     def __radians_to_steps(self, radians_list):
