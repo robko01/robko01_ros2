@@ -40,6 +40,7 @@ from control_msgs.action import FollowJointTrajectory
 from robko01.controllers.controller_factory import ControllerFactory
 from robko01.utils.thread_timer import ThreadTimer
 from robko01.utils.actions import Actions
+from robko01.utils.utils import scale
 
 import serial
 
@@ -210,10 +211,9 @@ class JointStatesListener(Node):
     def __calc_speeds(self, steps, speed):
         speeds = steps
         max_pos = max(steps)
-        if max_pos <= 0:
-            max_pos = 1
+        min_pos = min(steps)
         for index, step in enumerate(steps):
-            speeds[index] = (steps[index] * speed) / max_pos
+            speeds[index] = scale(speeds[index], min_pos, max_pos, 30, 50)
             speeds[index] = abs(speeds[index])
             speeds[index] = int(speeds[index])
             
