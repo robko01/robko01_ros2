@@ -222,6 +222,15 @@
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
+		<visual name="body_base_bottom">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+			<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="1.0 1.0 1.0"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
 	</link>
 	<joint type="revolute" name="shoulder">
 		<parent link="torso" />
