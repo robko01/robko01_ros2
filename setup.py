@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import find_packages, setup
 import os
+import glob
 
 package_name = 'robko01_ros2'
 
@@ -34,7 +35,7 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/demo_launch.py', 'launch/gazebo_launch.py', 'launch/rviz_launch.py']),
+        ('share/' + package_name + '/launch', glob("launch/*.py")), #['launch/demo_launch.py', 'launch/gazebo_launch.py', 'launch/rviz_launch.py']),
         ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
         ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
         ('share/' + package_name + '/meshes', ['meshes/base_dynamic.STL', 'meshes/body_base_bottom.STL']),
