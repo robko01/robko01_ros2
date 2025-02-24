@@ -200,6 +200,7 @@ class JointStatesListener(Node):
         except Exception as exc:
             self.__robot_ready = False
             self.__logger.error(traceback.format_exc())
+            self.__controller.connect()
 
     def __init_action_timer(self):
         self.__action_update_timer.update_rate = 0.1
