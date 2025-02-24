@@ -66,7 +66,7 @@ class JointStatesListener(Node):
         """Controller instance.
         """        
 
-        self.__set_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__target_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         """Set position.
         """        
 
@@ -168,8 +168,8 @@ class JointStatesListener(Node):
             pass
 
         if action == Actions.UpdateAbsolutePositions:
-            self.__controller.move_absolute(self.__set_position)
-            self.__logger.info(f'{self.__set_position}')
+            self.__controller.move_absolute(self.__target_position)
+            self.__logger.info(f'{self.__target_position}')
 
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
@@ -262,8 +262,8 @@ class JointStatesListener(Node):
         steps[5] = steps[5] - steps[2]
 
         # Apply the position.
-        self.__set_position[0:12:2] = steps
-        self.__set_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
+        self.__target_position[0:12:2] = steps
+        self.__target_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
 
         # Go to position.
         self.__put_action(Actions.UpdateAbsolutePositions)
