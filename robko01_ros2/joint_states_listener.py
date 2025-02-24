@@ -240,8 +240,6 @@ class JointStatesListener(Node):
     def __listener_callback(self, msg):
 
         angles = msg.position[0:6]
-        # if self.__angles != angles:
-        #     self.__angles = angles
 
         # Elbow compensation.
         angles[2] = angles[2] + angles[1]
