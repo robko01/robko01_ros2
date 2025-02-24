@@ -135,17 +135,19 @@ class JointStatesListener(Node):
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
         self.declare_parameter('port', 8000)        # Default value is 8000
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
+        self.declare_parameter('timeout', 10)        # Default value is 10 scends
 
         # Get parameter values
         host = self.get_parameter('host').get_parameter_value().string_value
         port = self.get_parameter('port').get_parameter_value().integer_value
         cname = self.get_parameter('cname').get_parameter_value().string_value
+        timeout = self.get_parameter('timeout').get_parameter_value().integer_value
 
         # Manual convert to string.
         port = str(port)
 
         # Create the robot controller.
-        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
+        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname, timeout=timeout)
         self.__controller.connect()
         self.__controller.enable()
 
