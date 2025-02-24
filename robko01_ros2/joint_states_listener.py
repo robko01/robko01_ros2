@@ -240,35 +240,35 @@ class JointStatesListener(Node):
     def __listener_callback(self, msg):
 
         angles = msg.position[0:6]
-        if self.__angles != angles:
-            self.__angles = angles
+        # if self.__angles != angles:
+        #     self.__angles = angles
 
-            # Elbow compensation.
-            angles[2] = angles[2] + angles[1]
+        # Elbow compensation.
+        angles[2] = angles[2] + angles[1]
 
-            # P compensation.
-            angles[3] = angles[3] + angles[2]
+        # P compensation.
+        angles[3] = angles[3] + angles[2]
 
-            # Differentials inverse model.
-            q4 = angles[4] + angles[3]
-            q5 = angles[4] - angles[3]
-            angles[3] = q4
-            angles[4] = q5
+        # Differentials inverse model.
+        q4 = angles[4] + angles[3]
+        q5 = angles[4] - angles[3]
+        angles[3] = q4
+        angles[4] = q5
 
-            # Convert to steps.
-            steps = self.__radians_to_steps(angles)
+        # Convert to steps.
+        steps = self.__radians_to_steps(angles)
 
-            # Gripper compensation.
-            # In steps is essayer because
-            # ration between elbow and gripper is 1:1.
-            steps[5] = steps[5] - steps[2]
+        # Gripper compensation.
+        # In steps is essayer because
+        # ration between elbow and gripper is 1:1.
+        steps[5] = steps[5] - steps[2]
 
-            # Apply the position.
-            self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
+        # Apply the position.
+        self.__set_position[0:12:2] = steps
+        self.__set_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
 
-            # Go to position.
-            self.__put_action(Actions.UpdateAbsolutePositions)
+        # Go to position.
+        self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
         # Subscription
