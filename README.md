@@ -34,14 +34,37 @@ source install/setup.bash
 
 ## Run the service for communication with the robot controller
 
- - Run the controller
+ - Run the controller if interface is Serial
+```sh
+ros2 run robko01_ros2 service --ros-args --param port:=/dev/ttyUSB0
 ```
- ros2 run robko01_ros2 service -- /dev/ttyUSB0 orlin369
+
+ - Run the controller if interface is TCP/IP
+```sh
+ros2 run robko01_ros2 service --ros-args --param host:=192.168.88.221 --param port:=10182
 ```
 
 ## Run the client for sending trajectory to the service
 
  - Run the controller
+```sh
+ros2 run robko01_ros2 client
 ```
- ros2 run robko01_ros2 client
+
+## Install dependencies
+
+```sh
+sudo apt install ros-melodic-joint-state-publisher-gui
+```
+
+## Run the vizualization in RViz
+
+```sh
+ros2 launch robko01_ros2 display.launch.py
+```
+
+## Ensure that the robot description is loaded
+
+```sh
+ros2 param get /robot_state_publisher robot_description
 ```

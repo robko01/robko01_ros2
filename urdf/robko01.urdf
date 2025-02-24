@@ -1,236 +1,663 @@
 <?xml version="1.0"?>
 <robot name="robko01">
-  <!-- description of the robot -->
-  <link name="base">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="base">
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-		<box size="0.32 0.26 0.085"/>
-      </geometry>
-    </collision>
-    <visual name="base">
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-		<box size="0.32 0.26 0.085"/>
-      </geometry>
-      <material name="Black1">
-        <color rgba="0.0 0.0 0.0 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <link name="torso">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="torso">
-      <origin xyz="-0.1 0.0 0.1" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.3 0.2 0.3"/>
-      </geometry>
-    </collision>
-    <visual name="body">
-      <origin xyz="-0.1 0.0 0.1" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.3 0.2 0.3"/>
-      </geometry>
-      <material name="Orange1">
-        <color rgba="0.5 0.2 0.0 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m1">
-      <origin xyz="-0.01 0.115 0.1" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m2">
-      <origin xyz="-0.01 -0.115 0.1" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m3">
-      <origin xyz="-0.06 0.115 0.0" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m4">
-      <origin xyz="-0.06 -0.115 0.0" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m5">
-      <origin xyz="-0.18 0.115 0.0" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.2 0.2 0.2 1.0"/>
-	  </material>
-    </visual>
-    <visual name="m6">
-      <origin xyz="-0.18 -0.115 0.0" rpy="1.5707963705063 0.0 0.0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.03"/>
-      </geometry>
-      <material name="Orange1">
-        <color rgba="0.5 0.2 0.0 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <link name="shoulder">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="shoulder">
-      <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.15 0.15 0.4"/>
-      </geometry>
-    </collision>
-    <visual name="body">
-      <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.15 0.15 0.4"/>
-      </geometry>
-      <material name="Orange1">
-        <color rgba="0.5 0.2 0.0 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <link name="elbow">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="elbow">
-      <origin xyz="0.2 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.4 0.15 0.15"/>
-      </geometry>
-    </collision>
-    <visual name="elbow">
-      <origin xyz="0.2 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.4 0.15 0.15"/>
-      </geometry>
-      <material name="Orange1">
-        <color rgba="0.5 0.2 0.0 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <link name="p">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="p">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.15 0.15 0.15"/>
-      </geometry>
-    </collision>
-    <visual name="p">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.15 0.15 0.15"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.3 0.3 0.3 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <link name="r">
-    <inertial>
-      <origin xyz="0 0 0.0425" rpy="0 0 0" />
-      <mass value="2.5" />
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
-    </inertial>
-    <collision name="r">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.05 0.20 0.05"/>
-      </geometry>
-    </collision>
-    <visual name="r">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <geometry>
-		<box size="0.05 0.20 0.05"/>
-      </geometry>
-      <material name="Gray1">
-        <color rgba="0.3 0.3 0.3 1.0"/>
-	  </material>
-    </visual>
-  </link>
-
-  <joint type="revolute" name="base">
-    <parent link="base" />
-    <child link="torso" />
-    <origin xyz="0.1 0.0 0.1" rpy="0.0 0.0 0.0"/>
-    <axis xyz="0.0 0.0 1.0" />
-    <limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-  </joint>
- 
-   <joint type="revolute" name="shoulder">
-    <parent link="torso" />
-    <child link="shoulder" />
-    <origin xyz="-0.03 0.0 0.18" rpy="0.0 0.0 0.0"/>
-    <axis xyz="0.0 1.0 0.0" />
-    <limit upper="2.5" lower="-0.8" velocity="3" effort="10" />
-  </joint>
-
-   <joint type="revolute" name="elbow">
-    <parent link="shoulder" />
-    <child link="elbow" />
-    <origin xyz="0.0 0.0 0.4" rpy="0.0 0.0 0.0"/>
-    <axis xyz="0.0 1.0 0.0" />
-    <limit upper="1.0" lower="-1.5707963705063" velocity="3" effort="10" />
-  </joint>
-
-   <joint type="revolute" name="p">
-    <parent link="elbow" />
-    <child link="p" />
-    <origin xyz="0.43 0.0 0.0" rpy="0.0 0.0 0.0"/>
-    <axis xyz="0.0 1.0 0.0" />
-    <limit upper="1.0" lower="-1.5707963705063" velocity="3" effort="10" />
-  </joint>
-
-   <joint type="revolute" name="r">
-    <parent link="p" />
-    <child link="r" />
-    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
-    <axis xyz="1.0 0.0 0.0" />
-    <limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-  </joint>
-
+	<!-- description of the robot -->
+	<link name="base_link">
+		<inertial>
+			<origin  xyz="-0.0685 0 0.027" rpy="0 0 0"/>
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="base_link">
+			<origin  xyz="-0.0685 0 0.027" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.227 0.154 0.030"/>
+			</geometry>
+		</collision>
+		<visual name="base_link">
+			<origin  xyz="-0.0685 0 0.027" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.227 0.154 0.030"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="p1">
+			<origin xyz="0.0 0.0 0.0425" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.045" length="0.005"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="ax1">
+			<origin xyz="0.0 0.0 0.0825" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.010" length="0.085"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.5 0.5 0.5 1.0"/>
+			</material>
+		</visual>
+		<visual name="f1">
+			<origin xyz="0.0315 0.0635 0.00675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.010" length="0.0135"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="f2">
+			<origin xyz="0.0315 -0.0635 0.00675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.010" length="0.0135"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="f3">
+			<origin xyz="-0.1675 0.0635 0.00675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.010" length="0.0135"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="f4">
+			<origin xyz="-0.1675 -0.0635 0.00675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.010" length="0.0135"/>
+			</geometry>
+			<material name="Black1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="base">
+		<parent link="base_link" />
+		<child link="torso" />
+		<origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0" />
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+	</joint>
+	<link name="torso">
+		<inertial>
+			<origin xyz="-0.0385 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="torso">
+			<origin xyz="-0.0385 0.0 0.100" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.167 0.088 0.200"/>
+			</geometry>
+		</collision>
+		<visual name="torso_axis">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 0.0 1.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_l">
+			<origin xyz="-0.0385 0.040 0.0675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.167 0.002 0.135"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_6_c">
+			<origin xyz="0.0 0.040 0.150" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_c1">
+			<origin xyz="-0.0385 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.167 0.078 0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_c2">
+			<origin xyz="0.010 0.0 0.060" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.065 0.078 0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_r">
+			<origin xyz="-0.0385 -0.040 0.0675" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.167 0.002 0.135"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="torso_r_c">
+			<origin xyz="0.0 -0.040 0.150" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="m1">
+			<origin xyz="0.0 0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="m2">
+			<origin xyz="-0.095 -0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="m3">
+			<origin xyz="-0.095 0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="m4">
+			<origin xyz="-0.025 -0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="m5">
+			<origin xyz="-0.025 0.0565 0.030" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="m6">
+			<origin xyz="0.0 -0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="base_dynamic">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+			<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.0 1.0 1.0"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="body_base_bottom">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+			<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="1.0 1.0 1.0"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="shoulder">
+		<parent link="torso" />
+		<child link="shoulder" />
+		<origin xyz="0.0 0.0 0.150" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 1.0 0.0" />
+		<limit upper="2.5" lower="-0.8" velocity="3" effort="10" />
+	</joint>
+	<link name="shoulder">
+		<inertial>
+			<origin xyz="0 0 0.0425" rpy="0 0 0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="shoulder">
+			<origin xyz="0.0 0.0 0.080" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.085 0.044 0.250"/>
+			</geometry>
+		</collision>
+		<visual name="shoulder_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_l">
+			<origin xyz="0.0 0.039 0.0889" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.085 0.002 0.1778"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_l_c">
+			<origin xyz="0.0 0.039 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_c">
+			<origin xyz="-0.0425 0.0025 0.0889" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.002 0.073 0.1778"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_r">
+			<origin xyz="0.0 -0.034 0.0889" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.085 0.002 0.1778"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="shoulder_r_c">
+			<origin xyz="0.0 -0.034 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0425" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="elbow">
+		<parent link="shoulder" />
+		<child link="elbow" />
+		<origin xyz="0.0 0.0 0.1778" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 1.0 0.0" />
+		<limit upper="1.0" lower="-1.5707963705063" velocity="3" effort="10" />
+	</joint>
+	<link name="elbow">
+		<inertial>
+			<origin xyz="0.080 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="elbow">
+			<origin xyz="0.080 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.220 0.050 0.050"/>
+			</geometry>
+		</collision>
+		<visual name="elbow_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="elbow_l">
+			<origin xyz="0.0889 0.025 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.1778 0.002 0.050"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="elbow_l_c">
+			<origin xyz="0.0 0.025 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.025" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="elbow_c">
+			<origin xyz="0.0825 0.0 0.025" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.165 0.050 0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="elbow_r">
+			<origin xyz="0.0889 -0.025 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.1778 0.002 0.050"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="elbow_r_c">
+			<origin xyz="0.0 -0.025 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.025" length="0.002"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.5 0.2 0.0 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="p">
+		<parent link="elbow" />
+		<child link="p" />
+		<origin xyz="0.1778 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 1.0 0.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+	</joint>
+	<link name="p">
+		<visual name="p_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="p_center">
+			<origin xyz="-0.003 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.013 0.013 0.016"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="p_r_c">
+			<origin xyz="0.0 -0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="p_l_c">
+			<origin xyz="0.0 0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="r">
+		<parent link="p" />
+		<child link="gripper_main" />
+		<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="1.0 0.0 0.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+	</joint>
+	<link name="gripper_main">
+		<inertial>
+			<origin xyz="0 0 0.0425" rpy="0 0 0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="r">
+			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.019 0.07 0.019"/>
+			</geometry>
+		</collision>
+		<visual name="p_axis">
+			<origin xyz="0.0275 0.00 0.0" rpy="-1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="0.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="r_axis">
+			<origin xyz="0.0 0.00 0.0" rpy="0.0 -1.5707963705063 0.0" />
+			<geometry>
+				<cylinder radius="0.001" length="0.500"/>
+			</geometry>
+			<material name="Orange1">
+				<color rgba="1.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<visual name="r">
+			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.019 0.07 0.019"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+		<visual name="p_c_c">
+			<origin xyz="0.0125 0.0 0.000" rpy="0.0 1.5707963705063 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="gripper_1">
+		<parent link="gripper_main" />
+		<child link="gripper_1" />
+		<origin xyz="0.0275 -0.035 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+	</joint>
+	<joint type="revolute" name="gripper_2">
+		<parent link="gripper_main" />
+		<child link="gripper_2" />
+		<origin xyz="0.0275 -0.028 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
+	</joint>
+	<joint type="revolute" name="gripper_3">
+		<parent link="gripper_main" />
+		<child link="gripper_3" />
+		<origin xyz="0.0275 0.035 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+	</joint>
+	<joint type="revolute" name="gripper_4">
+		<parent link="gripper_main" />
+		<child link="gripper_4" />
+		<origin xyz="0.0275 0.028 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+	</joint>
+	<link name="gripper_1">
+		<inertial>
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_1">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_1">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<link name="gripper_2">
+		<inertial>
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_2">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_2">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<link name="gripper_3">
+		<inertial>
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_3">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_3">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<link name="gripper_4">
+		<inertial>
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_4">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_4">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.044 0.006 0.019"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="gripper_5">
+		<parent link="gripper_2" />
+		<child link="gripper_5" />
+		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+	</joint>
+	<link name="gripper_5">
+		<inertial>
+			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_5">
+			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.026 0.013 0.013"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_5">
+			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.026 0.013 0.013"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
+	<joint type="revolute" name="gripper_6">
+		<parent link="gripper_4" />
+		<child link="gripper_6" />
+		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		<axis xyz="0.0 0.0 1.0" />
+		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
+	</joint>
+	<link name="gripper_6">
+		<inertial>
+			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<mass value="2.5" />
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		</inertial>
+		<collision name="gripper_6">
+			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.026 0.013 0.013"/>
+			</geometry>
+		</collision>
+		<visual name="gripper_6">
+			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.026 0.013 0.013"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.3 0.3 0.3 1.0"/>
+			</material>
+		</visual>
+	</link>
 </robot>

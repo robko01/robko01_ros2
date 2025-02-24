@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from setuptools import find_packages, setup
+import os
 
 package_name = 'robko01_ros2'
 
@@ -31,21 +32,26 @@ setup(
     version='0.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', ['launch/demo_launch.py', 'launch/gazebo_launch.py', 'launch/rviz_launch.py']),
+        ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
+        ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
+        ('share/' + package_name + '/meshes', ['meshes/base_dynamic.STL', 'meshes/body_base_bottom.STL']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='user',
     maintainer_email='orlin369@gmail.com',
-    description='ROS2 python package for supproting Robko01',
+    description='ROS2 python package for supporting Robko01',
     license='GPL License',
     # tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'service = robko01_ros2.service:main',
             'client = robko01_ros2.client:main',
+            'joint_states_listener = robko01_ros2.joint_states_listener:main',
+            'state_publisher = robko01_ros2.state_publisher:main'
         ],
     },
     # Use the new-style development mode
