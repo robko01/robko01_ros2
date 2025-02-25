@@ -34,10 +34,10 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/demo_launch.py', 'launch/gazebo_launch.py', 'launch/rviz_launch.py']),
+        ('share/' + package_name + '/launch', [os.path.join("launch/", f) for f in os.listdir("./meshes/") if f.endswith(('.py'))]),
         ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
         ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
-        ('share/' + package_name + '/meshes', ['meshes/base_dynamic.STL', 'meshes/body_base_bottom.STL']),
+        ('share/' + package_name + '/meshes', [os.path.join("meshes/", f) for f in os.listdir("./meshes/") if f.endswith(('.STL'))]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
