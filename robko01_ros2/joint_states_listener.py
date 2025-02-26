@@ -154,7 +154,7 @@ class JointStatesListener(Node):
             try:
                 self.__controller.connect()
                 # Enable the motors.
-                self.__controller.enable()
+                # self.__controller.enable()
                 # Stop reconnect cycle.
                 break
             except Exception as exc:
