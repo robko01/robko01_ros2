@@ -150,8 +150,16 @@ class JointStatesListener(Node):
 
         # Create the robot controller.
         self.__controller = ControllerFactory.create(interface=interface, host=host, port=port, cname=cname, timeout=timeout)
-        self.__controller.connect()
-        self.__controller.enable()
+        while True:
+            try:
+                self.__controller.connect()
+                # Enable the motors.
+                self.__controller.enable()
+                # Stop reconnect cycle.
+                break
+            except Exception as exc:
+                self.__logger.error(exc)
+                continue
 
 #endregion
 
