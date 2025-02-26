@@ -91,7 +91,7 @@
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
 		<collision name="torso">
-			<origin xyz="-0.0385 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<origin xyz="-0.0385 0.0 0.100" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.167 0.088 0.200"/>
 			</geometry>
@@ -208,6 +208,24 @@
 			<origin xyz="0.0 -0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.03" length="0.025"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="base_dynamic">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+			<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.0 1.0 1.0"/>
+			</geometry>
+			<material name="Gray1">
+				<color rgba="0.2 0.2 0.2 1.0"/>
+			</material>
+		</visual>
+		<visual name="body_base_bottom">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+			<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="1.0 1.0 1.0"/>
 			</geometry>
 			<material name="Gray1">
 				<color rgba="0.2 0.2 0.2 1.0"/>
@@ -397,8 +415,8 @@
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
-		<visual name="p_c_c">
-			<origin xyz="0.0125 0.0 0.000" rpy="0.0 1.5707963705063 0.0" />
+		<visual name="p_l_c">
+			<origin xyz="0.0 0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.0075" length="0.016"/>
 			</geometry>
@@ -453,8 +471,8 @@
 				<color rgba="0.3 0.3 0.3 1.0"/>
 			</material>
 		</visual>
-		<visual name="p_l_c">
-			<origin xyz="0.0 0.0155 0.000" rpy="1.5707963705063 0.0 0.0" />
+		<visual name="p_c_c">
+			<origin xyz="0.0125 0.0 0.000" rpy="0.0 1.5707963705063 0.0" />
 			<geometry>
 				<cylinder radius="0.0075" length="0.016"/>
 			</geometry>

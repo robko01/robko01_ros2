@@ -40,6 +40,7 @@ from control_msgs.action import FollowJointTrajectory
 from robko01.controllers.controller_factory import ControllerFactory
 from robko01.utils.thread_timer import ThreadTimer
 from robko01.utils.actions import Actions
+from robko01.utils.utils import scale
 
 import serial
 
@@ -65,7 +66,7 @@ class JointStatesListener(Node):
         """Controller instance.
         """        
 
-        self.__set_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__target_position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         """Set position.
         """        
 
@@ -97,7 +98,7 @@ class JointStatesListener(Node):
         """Subscription topic.
         """
 
-        self.__rate = 1
+        self.__rate = 10
         """Update rate.
         """        
 
@@ -131,20 +132,24 @@ class JointStatesListener(Node):
 
     def __init_controller(self):
         # Declare parameters
+        self.declare_parameter('interface', 'udp')  # Default value is 'udp'
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
-        self.declare_parameter('port', 8000)        # Default value is 8000
+        self.declare_parameter('port', 10182)        # Default value is 10182
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
+        self.declare_parameter('timeout', 10)        # Default value is 10 scends
 
         # Get parameter values
+        interface = self.get_parameter('interface').get_parameter_value().string_value
         host = self.get_parameter('host').get_parameter_value().string_value
         port = self.get_parameter('port').get_parameter_value().integer_value
         cname = self.get_parameter('cname').get_parameter_value().string_value
+        timeout = self.get_parameter('timeout').get_parameter_value().integer_value
 
         # Manual convert to string.
         port = str(port)
 
         # Create the robot controller.
-        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname)
+        self.__controller = ControllerFactory.create(interface=interface, host=host, port=port, cname=cname, timeout=timeout)
         self.__controller.connect()
         self.__controller.enable()
 
@@ -165,8 +170,8 @@ class JointStatesListener(Node):
             pass
 
         if action == Actions.UpdateAbsolutePositions:
-            self.__controller.move_absolute(self.__set_position)
-            self.__logger.info(f'{self.__set_position}')
+            self.__controller.move_absolute(self.__target_position)
+            self.__logger.info(f'{self.__target_position}')
 
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
@@ -199,13 +204,34 @@ class JointStatesListener(Node):
             self.__logger.error(traceback.format_exc())
 
     def __init_action_timer(self):
-        self.__action_update_timer.update_rate = 1
+        self.__action_update_timer.update_rate = 0.1
         self.__action_update_timer.set_cb(self.__action_timer_cb)
         self.__action_update_timer.start()
 
 #endregion
 
 #region Private Methods (Listener)
+
+    def __calc_speeds(self, steps, speed):
+
+        speeds = steps
+        max_pos = max(steps)
+        min_pos = min(steps)
+
+        if max_pos <= 0:
+            max_pos = 2
+
+        if min_pos <= 0:
+            min_pos = 1
+
+        for index, step in enumerate(steps):
+            speeds[index] = speeds[index] / speed
+            # speeds[index] = scale(speeds[index], min_pos, max_pos, 5, 50)
+            # speeds[index] = (steps[index] * speed) / max_pos
+            speeds[index] = abs(speeds[index])
+            speeds[index] = int(speeds[index])
+
+        return speeds
 
     def __radians_to_steps(self, radians_list):
         result = []
@@ -216,35 +242,33 @@ class JointStatesListener(Node):
     def __listener_callback(self, msg):
 
         angles = msg.position[0:6]
-        if self.__angles != angles:
-            self.__angles = angles
 
-            # Elbow compensation.
-            angles[2] = angles[2] + angles[1]
+        # Elbow compensation.
+        angles[2] = angles[2] + angles[1]
 
-            # P compensation.
-            angles[3] = angles[3] + angles[2]
+        # P compensation.
+        angles[3] = angles[3] + angles[2]
 
-            # Differentials inverse model.
-            q4 = angles[4] + angles[3]
-            q5 = angles[4] - angles[3]
-            angles[3] = q4
-            angles[4] = q5
+        # Differentials inverse model.
+        q4 = angles[4] + angles[3]
+        q5 = angles[4] - angles[3]
+        angles[3] = q4
+        angles[4] = q5
 
-            # Convert to steps.
-            steps = self.__radians_to_steps(angles)
+        # Convert to steps.
+        steps = self.__radians_to_steps(angles)
 
-            # Gripper compensation.
-            # In steps is essayer because
-            # ration between elbow and gripper is 1:1.
-            steps[5] = steps[5] - steps[2]
+        # Gripper compensation.
+        # In steps is essayer because
+        # ration between elbow and gripper is 1:1.
+        steps[5] = steps[5] - steps[2]
 
-            # Apply the position.
-            self.__set_position[0:12:2] = steps
-            self.__set_position[1:12:2] = [self.__speed]*6
+        # Apply the position.
+        self.__target_position[0:12:2] = steps
+        self.__target_position[1:12:2] = self.__calc_speeds(steps, self.__speed)
 
-            # Go to position.
-            self.__put_action(Actions.UpdateAbsolutePositions)
+        # Go to position.
+        self.__put_action(Actions.UpdateAbsolutePositions)
 
     def __init_joint_listener(self):
         # Subscription
