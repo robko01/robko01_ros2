@@ -166,12 +166,13 @@ class JointStatesListener(Node):
         if self.__controller is None:
             return
 
+
         if action == Actions.NONE:
             pass
 
-        if action == Actions.UpdateAbsolutePositions:
-            self.__controller.move_absolute(self.__target_position)
+        elif action == Actions.UpdateAbsolutePositions:
             self.__logger.info(f'{self.__target_position}')
+            self.__controller.move_absolute(self.__target_position)
 
         elif action == Actions.UpdateOutputs:
             self.__controller.set_outputs(self.__port_a_outputs)
@@ -180,6 +181,9 @@ class JointStatesListener(Node):
             self.__controller.clear()
 
         elif action == Actions.ResetController:
+            pass
+
+        else:
             pass
 
     def __action_timer_cb(self):
@@ -198,6 +202,10 @@ class JointStatesListener(Node):
         except serial.serialutil.SerialException as exc:
             self.__robot_ready = False
             self.__logger.error(exc)
+
+        except TimeoutError:
+            self.__robot_ready = False
+            self.__logger.error("Timeout communication error.")
 
         except Exception as exc:
             self.__robot_ready = False
