@@ -271,13 +271,13 @@ class JointStatesListener(Node):
         angles[3] = q4
         angles[4] = q5
 
-        # Convert to steps.
-        steps = self.__radians_to_steps(angles)
-
         # Gripper compensation.
         # In steps is essayer because
         # ration between elbow and gripper is 1:1.
-        steps[5] = steps[5] - steps[2]
+        angles[5] = angles[5] - angles[2]
+
+        # Convert to steps.
+        steps = self.__radians_to_steps(angles)
 
         # Apply the position.
         self.__target_position[0:12:2] = steps
