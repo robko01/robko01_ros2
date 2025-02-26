@@ -58,7 +58,7 @@ class JointStatesListener(Node):
         self.__logger.info("HOI -> Human Oral Interaction")
 
         # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Original
-        self.__conversion_table_rad = [544, 544, 325, 140, 140, 150] # Compensated because of the motors controllers settings.
+        self.__conversion_table_rad = [544, 544, 325, 120, 120, 550] # Compensated because of the motors controllers settings.
         """Conversion tables from radians to steps.
         """
 
@@ -136,7 +136,7 @@ class JointStatesListener(Node):
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
         self.declare_parameter('port', 10182)        # Default value is 10182
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
-        self.declare_parameter('timeout', 10)        # Default value is 10 scends
+        self.declare_parameter('timeout', 5)        # Default value is 10 scends
 
         # Get parameter values
         interface = self.get_parameter('interface').get_parameter_value().string_value
@@ -150,8 +150,16 @@ class JointStatesListener(Node):
 
         # Create the robot controller.
         self.__controller = ControllerFactory.create(interface=interface, host=host, port=port, cname=cname, timeout=timeout)
-        self.__controller.connect()
-        self.__controller.enable()
+        while True:
+            try:
+                self.__controller.connect()
+                # Enable the motors.
+                # self.__controller.enable()
+                # Stop reconnect cycle.
+                break
+            except Exception as exc:
+                self.__logger.error(exc)
+                continue
 
 #endregion
 
