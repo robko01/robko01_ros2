@@ -132,12 +132,14 @@ class JointStatesListener(Node):
 
     def __init_controller(self):
         # Declare parameters
+        self.declare_parameter('interface', 'udp')  # Default value is 'udp'
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
-        self.declare_parameter('port', 8000)        # Default value is 8000
+        self.declare_parameter('port', 10182)        # Default value is 8000
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
         self.declare_parameter('timeout', 10)        # Default value is 10 scends
 
         # Get parameter values
+        interface = self.get_parameter('interface').get_parameter_value().string_value
         host = self.get_parameter('host').get_parameter_value().string_value
         port = self.get_parameter('port').get_parameter_value().integer_value
         cname = self.get_parameter('cname').get_parameter_value().string_value
@@ -147,7 +149,7 @@ class JointStatesListener(Node):
         port = str(port)
 
         # Create the robot controller.
-        self.__controller = ControllerFactory.create(host=host, port=port, cname=cname, timeout=timeout)
+        self.__controller = ControllerFactory.create(interface=interface, host=host, port=port, cname=cname, timeout=timeout)
         self.__controller.connect()
         self.__controller.enable()
 

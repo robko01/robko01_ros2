@@ -89,7 +89,7 @@ def generate_launch_description():
         package=package_name,
         executable='joint_states_listener',  # No .py extension
         name='joint_states_listener',
-        arguments=['--ros-args', '--param', 'host:=remote1.robko01.loc', '--param', 'port:=10182'],
+        arguments=['--ros-args', '--param', 'host:=remote1.robko01.loc'],
         output='screen'
     )
 
