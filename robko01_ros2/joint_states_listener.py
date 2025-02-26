@@ -136,7 +136,7 @@ class JointStatesListener(Node):
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
         self.declare_parameter('port', 10182)        # Default value is 10182
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
-        self.declare_parameter('timeout', 2)        # Default value is 10 scends
+        self.declare_parameter('timeout', 5)        # Default value is 10 scends
 
         # Get parameter values
         interface = self.get_parameter('interface').get_parameter_value().string_value
