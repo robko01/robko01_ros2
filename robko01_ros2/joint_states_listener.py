@@ -134,7 +134,7 @@ class JointStatesListener(Node):
         # Declare parameters
         self.declare_parameter('interface', 'udp')  # Default value is 'udp'
         self.declare_parameter('host', 'localhost')  # Default value is 'localhost'
-        self.declare_parameter('port', 10182)        # Default value is 8000
+        self.declare_parameter('port', 10182)        # Default value is 10182
         self.declare_parameter('cname', "orlin369")        # Default value is orlin369
         self.declare_parameter('timeout', 10)        # Default value is 10 scends
 
