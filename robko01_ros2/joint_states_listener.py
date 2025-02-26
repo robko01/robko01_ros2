@@ -204,7 +204,8 @@ class JointStatesListener(Node):
             self.__logger.error(exc)
 
         except TimeoutError:
-            print("Timeout communication error.")
+            self.__robot_ready = False
+            self.__logger.error("Timeout communication error.")
 
         except Exception as exc:
             self.__robot_ready = False
