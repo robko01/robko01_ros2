@@ -486,7 +486,7 @@
 		<child link="gripper_1" />
 		<origin xyz="0.0275 -0.035 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
-		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
+		<limit upper="0.6" lower="-0.6" velocity="3" effort="10" />
 	</joint>
 	<joint type="revolute" name="gripper_2">
 		<parent link="gripper_main" />
