@@ -58,7 +58,7 @@ class JointStatesListener(Node):
         self.__logger.info("HOI -> Human Oral Interaction")
 
         # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Original
-        self.__conversion_table_rad = [544, 544, 325, 120, 120, 325] # Compensated because of the motors controllers settings.
+        self.__conversion_table_rad = [544, 544, 325, 120, 120, 500] # Compensated because of the motors controllers settings.
         """Conversion tables from radians to steps.
         """
 
@@ -271,13 +271,13 @@ class JointStatesListener(Node):
         angles[3] = q4
         angles[4] = q5
 
+        # Convert to steps.
+        steps = self.__radians_to_steps(angles)
+
         # Gripper compensation.
         # In steps is essayer because
         # ration between elbow and gripper is 1:1.
-        angles[5] = angles[5] - angles[2]
-
-        # Convert to steps.
-        steps = self.__radians_to_steps(angles)
+        steps[5] = steps[5] - steps[2]
 
         # Apply the position.
         self.__target_position[0:12:2] = steps
