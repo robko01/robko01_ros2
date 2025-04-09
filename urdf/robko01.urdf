@@ -213,24 +213,24 @@
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
-		<visual name="base_dynamic">
+		<!-- <visual name="base_dynamic">
 			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
-			<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.0 1.0 1.0"/>
+				<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.0 1.0 1.0"/>
 			</geometry>
 			<material name="Gray1">
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
-		</visual>
-		<visual name="body_base_bottom">
+		</visual> -->
+		<!-- <visual name="body_base_bottom">
 			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
-			<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="1.0 1.0 1.0"/>
+				<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="1.0 1.0 1.0"/>
 			</geometry>
 			<material name="Gray1">
 				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
-		</visual>
+		</visual> -->
 	</link>
 	<joint type="revolute" name="shoulder">
 		<parent link="torso" />
@@ -481,50 +481,50 @@
 			</material>
 		</visual>
 	</link>
-	<joint type="revolute" name="gripper_1">
+	<joint type="revolute" name="finger_1">
 		<parent link="gripper_main" />
-		<child link="gripper_1" />
+		<child link="finger_1" />
 		<origin xyz="0.0275 -0.035 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="0.6" lower="-0.6" velocity="3" effort="10" />
 	</joint>
-	<joint type="revolute" name="gripper_2">
+	<joint type="revolute" name="finger_2">
 		<parent link="gripper_main" />
-		<child link="gripper_2" />
+		<child link="finger_2" />
 		<origin xyz="0.0275 -0.028 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
+		<mimic joint="finger_1" multiplier="1.0" offset="0.0" />
 	</joint>
-	<joint type="revolute" name="gripper_3">
+	<joint type="revolute" name="finger_3">
 		<parent link="gripper_main" />
-		<child link="gripper_3" />
+		<child link="finger_3" />
 		<origin xyz="0.0275 0.035 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="finger_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<joint type="revolute" name="gripper_4">
+	<joint type="revolute" name="finger_4">
 		<parent link="gripper_main" />
-		<child link="gripper_4" />
+		<child link="finger_4" />
 		<origin xyz="0.0275 0.028 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="finger_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<link name="gripper_1">
+	<link name="finger_1">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_1">
+		<collision name="finger_1">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_1">
+		<visual name="finger_1">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -534,19 +534,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="gripper_2">
+	<link name="finger_2">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_2">
+		<collision name="finger_2">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_2">
+		<visual name="finger_2">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -556,19 +556,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="gripper_3">
+	<link name="finger_3">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_3">
+		<collision name="finger_3">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_3">
+		<visual name="finger_3">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -578,19 +578,19 @@
 			</material>
 		</visual>
 	</link>
-	<link name="gripper_4">
+	<link name="finger_4">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_4">
+		<collision name="finger_4">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_4">
+		<visual name="finger_4">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.044 0.006 0.019"/>
@@ -600,27 +600,27 @@
 			</material>
 		</visual>
 	</link>
-	<joint type="revolute" name="gripper_5">
-		<parent link="gripper_2" />
-		<child link="gripper_5" />
+	<joint type="revolute" name="fingertip_r">
+		<parent link="finger_2" />
+		<child link="fingertip_r" />
 		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="gripper_1" multiplier="-1.0" offset="0.0" />
+		<mimic joint="finger_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<link name="gripper_5">
+	<link name="fingertip_r">
 		<inertial>
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_5">
+		<collision name="fingertip_r">
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_5">
+		<visual name="fingertip_r">
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
@@ -630,33 +630,42 @@
 			</material>
 		</visual>
 	</link>
-	<joint type="revolute" name="gripper_6">
-		<parent link="gripper_4" />
-		<child link="gripper_6" />
+	<joint type="revolute" name="fingertip_l">
+		<parent link="finger_4" />
+		<child link="fingertip_l" />
 		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
 		<axis xyz="0.0 0.0 1.0" />
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
-		<mimic joint="gripper_1" multiplier="1.0" offset="0.0" />
+		<mimic joint="finger_1" multiplier="1.0" offset="0.0" />
 	</joint>
-	<link name="gripper_6">
+	<link name="fingertip_l">
 		<inertial>
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<mass value="2.5" />
 			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
-		<collision name="gripper_6">
+		<collision name="fingertip_l">
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
 			</geometry>
 		</collision>
-		<visual name="gripper_6">
+		<visual name="fingertip_l">
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.026 0.013 0.013"/>
 			</geometry>
+			<material name="">
+				<color rgba="0.3 1.0 0.3 1.0"/>
+			</material>
+		</visual>
+		<visual name="base_dynamic">
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.0 1.0 1.0"/>
+			</geometry>
 			<material name="Gray1">
-				<color rgba="0.3 0.3 0.3 1.0"/>
+				<color rgba="0.2 0.2 0.2 1.0"/>
 			</material>
 		</visual>
 	</link>
