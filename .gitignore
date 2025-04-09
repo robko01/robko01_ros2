@@ -167,3 +167,6 @@ log/
 
 # ROS2 Install
 install/
+
+# VSCode workspace
+*.code-workspace
