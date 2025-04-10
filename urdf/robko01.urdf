@@ -211,7 +211,7 @@
 				<color rgba="0.9 0.6 0.05 1"/>
 			</material>
 		</visual>
-		<visual name="torso_6_c">
+		<visual name="torso_vertical_axis">
 			<origin xyz="0.0 0.040 0.150" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<cylinder radius="0.0425" length="0.002"/>
@@ -238,6 +238,24 @@
 				<color rgba="0.9 0.6 0.05 1.0"/>
 			</material>
 		</visual>
+		<!-- <visual name="torso_c3">
+			<origin xyz="0.20 -0.40 0.0" rpy="0.0 0.0 1.5707963705063" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/base_inside.STL" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.3 0.5 0.3 1.0"/>
+			</material>
+		</visual> -->
+		<visual name="torso_c3">
+			<origin xyz="-0.120 0.037 -0.001" rpy="1.5707963705063 0.0 -1.5707963705063" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/body_base_bottom.STL" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.3 0.5 0.3 1.0"/>
+			</material>
+		</visual>
 		<visual name="torso_r">
 			<origin xyz="-0.0385 -0.040 0.0675" rpy="0.0 0.0 0.0" />
 			<geometry>
@@ -256,6 +274,15 @@
 				<color rgba="0.9 0.6 0.05 1.0"/>
 			</material>
 		</visual>
+		<!-- <visual name="torso_sides">
+			<origin xyz="-0.120 0.037 -0.001" rpy="1.5707963705063 0.0 -1.5707963705063" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/base_dynamic.STL" scale="1.001 1.001 1.001"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.3 0.5 0.3 1.0"/>
+			</material>
+		</visual> -->
 		<visual name="m1">
 			<origin xyz="0.0 0.0565 0.090" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
