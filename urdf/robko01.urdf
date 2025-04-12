@@ -118,8 +118,8 @@
 	<link name="torso">
 		<inertial>
 			<origin xyz="-0.0385 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="torso_l">
 			<origin xyz="-0.0385 0.040 0.0675" rpy="0.0 0.0 0.0" />
@@ -366,8 +366,8 @@
 	<link name="shoulder">
 		<inertial>
 			<origin xyz="0 0 0.0425" rpy="0 0 0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="shoulder_l">
 			<origin xyz="0.0 0.039 0.0889" rpy="0.0 0.0 0.0" />
@@ -464,8 +464,8 @@
 	<link name="elbow">
 		<inertial>
 			<origin xyz="0.080 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="elbow_l">
 			<origin xyz="0.0889 0.025 0.0" rpy="0.0 0.0 0.0" />
@@ -560,6 +560,29 @@
 		<limit upper="1.5707963705063" lower="-1.5707963705063" velocity="3" effort="10" />
 	</joint>
 	<link name="p">
+		<inertial>
+			<origin xyz="-0.003 0.0 0.0" rpy="0 0 0" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+		</inertial>
+		<collision name="p_center">
+			<origin xyz="-0.003 0.0 0.0" rpy="0.0 0.0 0.0" />
+			<geometry>
+				<box size="0.013 0.013 0.016"/>
+			</geometry>
+		</collision>
+		<collision name="p_r_c">
+			<origin xyz="0.0 -0.0155 0.0" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+		</collision>
+		<collision name="p_l_c">
+			<origin xyz="0.0 0.0155 0.0" rpy="1.5707963705063 0.0 0.0" />
+			<geometry>
+				<cylinder radius="0.0075" length="0.016"/>
+			</geometry>
+		</collision>
 		<visual name="p_axis">
 			<origin xyz="0.0 0.0 0.0" rpy="-1.5707963705063 0.0 0.0" />
 			<geometry>
@@ -606,9 +629,9 @@
 	</joint>
 	<link name="gripper_main">
 		<inertial>
-			<origin xyz="0 0 0.0425" rpy="0 0 0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<origin xyz="0.0275 0.0 0.0" rpy="0 0 0" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="r">
 			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -694,8 +717,8 @@
 	<link name="finger_1">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="finger_1">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -716,8 +739,8 @@
 	<link name="finger_2">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="finger_2">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -738,8 +761,8 @@
 	<link name="finger_3">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="finger_3">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -760,8 +783,8 @@
 	<link name="finger_4">
 		<inertial>
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="finger_4">
 			<origin xyz="0.025 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -790,8 +813,8 @@
 	<link name="fingertip_r">
 		<inertial>
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="fingertip_r">
 			<origin xyz="0.0105 -0.00325 0.0" rpy="0.0 0.0 0.0" />
@@ -835,8 +858,8 @@
 	<link name="fingertip_l">
 		<inertial>
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
-			<mass value="2.5" />
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value="10" />
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="fingertip_l">
 			<origin xyz="0.0105 0.00325 0.0" rpy="0.0 0.0 0.0" />
