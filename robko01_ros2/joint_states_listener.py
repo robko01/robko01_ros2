@@ -57,8 +57,10 @@ class JointStatesListener(Node):
         self.__logger = self.get_logger()
         self.__logger.info("HOI -> Human Oral Interaction")
 
-        # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Original
-        self.__conversion_table_rad = [544, 544, 325, 120, 120, 550] # Compensated because of the motors controllers settings.
+        # self.__conversion_table_rad = [1125, 1125, 672, 241, 241, 1] # Conversion table for the 48 steps motors
+        # self.__conversion_table_rad = [544, 544, 325, 120, 120, 550] # Compensated because of the motors controllers settings.
+        # self.__conversion_table_rad = [4688, 4688, 2799, 1047, 1047] # Conversion table for the 200 steps motors
+        self.__conversion_table_rad = [2344, 2344, 1400, 502, 502, 1] # Compensated because of the motors controllers settings.
         """Conversion tables from radians to steps.
         """
 
