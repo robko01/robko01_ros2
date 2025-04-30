@@ -28,6 +28,7 @@ import threading
 import queue
 import traceback
 import argparse
+import time
 
 import rclpy
 from rclpy.node import Node
@@ -190,10 +191,16 @@ class JointStatesListener(Node):
 
         try:
             self.__axis_states = self.__controller.is_moving()
+            time.sleep(0.01)
+
             self.__current_position = self.__controller.current_position()
+            time.sleep(0.01)
+
             self.__port_a_inputs = self.__controller.get_inputs()
+            time.sleep(0.01)
 
             if not self.__actions_queue.empty():
+                time.sleep(0.01)
                 action = self.__actions_queue.get()
                 self.__do_action(action)
 
