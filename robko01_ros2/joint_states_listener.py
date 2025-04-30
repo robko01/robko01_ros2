@@ -25,9 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import sys
 import os
 import threading
+import argparse
 import queue
 import traceback
-import argparse
 import time
 
 import rclpy
@@ -191,15 +191,19 @@ class JointStatesListener(Node):
 
         try:
             self.__axis_states = self.__controller.is_moving()
+            # Not good but I have to give time robot to asimilate tha command.
             time.sleep(0.01)
 
             self.__current_position = self.__controller.current_position()
+            # Not good but I have to give time robot to asimilate tha command.
             time.sleep(0.01)
 
             self.__port_a_inputs = self.__controller.get_inputs()
+            # Not good but I have to give time robot to asimilate tha command.
             time.sleep(0.01)
 
             if not self.__actions_queue.empty():
+                # Not good but I have to give time robot to asimilate tha command.
                 time.sleep(0.01)
                 action = self.__actions_queue.get()
                 self.__do_action(action)
