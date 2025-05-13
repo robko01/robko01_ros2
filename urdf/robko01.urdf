@@ -831,13 +831,13 @@
 				<color rgba="0.3 0.3 0.3 1.0"/>
 			</material>
 		</visual>
-		<collision name="finger_prism_r">
+		<!-- <collision name="finger_prism_r">
 			<origin xyz="-0.070 0.003 0.194" rpy="-1.5707963705063 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
-		</collision>
-		<visual name="finger_prism_r">
+		</collision> -->
+		<!-- <visual name="finger_prism_r">
 			<origin xyz="-0.070 0.003 0.194" rpy="-1.5707963705063 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
@@ -845,7 +845,7 @@
 			<material name="">
 				<color rgba="0.3 0.5 0.3 1.0"/>
 			</material>
-		</visual>
+		</visual> -->
 	</link>
 	<joint type="revolute" name="fingertip_l">
 		<parent link="finger_4" />
@@ -876,7 +876,7 @@
 				<color rgba="0.3 0.3 0.3 1.0"/>
 			</material>
 		</visual>
-		<collision name="finger_prism_l">
+		<!-- <collision name="finger_prism_l">
 			<origin xyz="-0.070 -0.0030 -0.194" rpy="1.5707963705063 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
@@ -890,6 +890,6 @@
 			<material name="">
 				<color rgba="0.3 0.5 0.3 1.0"/>
 			</material>
-		</visual>
+		</visual> -->
 	</link>
 </robot>
