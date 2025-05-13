@@ -38,6 +38,7 @@ setup(
         ('share/' + package_name + '/urdf', ['urdf/robko01.urdf']),
         ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
         ('share/' + package_name + '/meshes', [os.path.join("meshes/", f) for f in os.listdir("./meshes/") if f.endswith(('.STL'))]),
+        ('share/' + package_name + '/description', [os.path.join("description/", f) for f in os.listdir("./description/") if f.endswith(('.xacro'))]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
