@@ -23,56 +23,61 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
+import tempfile
 
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+
+import xacro
 
 def generate_launch_description():
 
-    # Path to the package.
+    # Package and file paths
     package_name = 'robko01_ros2'
-    package_path = FindPackageShare(package=package_name).find(package_name)
+    pkg_share = FindPackageShare(package=package_name).find(package_name)
+    xacro_path = os.path.join(pkg_share, 'description', 'robko01.urdf.xacro')
 
-    # Path to the URDF model.
-    urdf_model_path = os.path.join(package_path, 'urdf', 'robko01.urdf')
+    # Process xacro to URDF
+    urdf_xml = xacro.process_file(xacro_path).toxml()
 
-    # Load the URDF model.
-    with open(urdf_model_path, 'r') as urdf_file:
-        urdf_model_content = urdf_file.read()
+    # Write to temporary file
+    tmp_urdf = tempfile.NamedTemporaryFile(delete=False, suffix=".urdf")
+    tmp_urdf.write(urdf_xml.encode('utf-8'))
+    tmp_urdf.close()
 
-    # Parameters for nodes
-    params = {'robot_description': urdf_model_content}
-
+    # Robot State Publisher
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[params]
+        parameters=[{
+            'robot_description': urdf_xml,
+            'use_sim_time': True
+        }]
     )
 
-    # Launch Gazebo
+    # Gazebo launch
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']
-        )
+        PythonLaunchDescriptionSource([
+            FindPackageShare('gazebo_ros'),
+            '/launch/gazebo.launch.py'
+        ])
     )
 
-    # Spawn Robot
+    # Spawn robot
     spawn_robot = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
         arguments=[
             '-entity', 'robko01',
-            '-file', urdf_model_path,
+            '-file', tmp_urdf.name,
             '-x', '0',
             '-y', '0',
-            '-z', '0.1',
-            '-robot_namespace', 'robko01',
-            '-reference_frame', 'world'
+            '-z', '0.1'
         ],
         output='screen'
     )
