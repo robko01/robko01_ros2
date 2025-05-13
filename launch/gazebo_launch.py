@@ -33,9 +33,25 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    # Paths
-    urdf_file = PathJoinSubstitution(
-        [FindPackageShare('robko01_ros2'), 'urdf', 'robko01.urdf']
+    # Path to the package.
+    package_name = 'robko01_ros2'
+    package_path = FindPackageShare(package=package_name).find(package_name)
+
+    # Path to the URDF model.
+    urdf_model_path = os.path.join(package_path, 'urdf', 'robko01.urdf')
+
+    # Load the URDF model.
+    with open(urdf_model_path, 'r') as urdf_file:
+        urdf_model_content = urdf_file.read()
+
+    # Parameters for nodes
+    params = {'robot_description': urdf_model_content}
+
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen',
+        parameters=[params]
     )
 
     # Launch Gazebo
@@ -51,17 +67,18 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=[
             '-entity', 'robko01',
-            '-file', urdf_file,
+            '-file', urdf_model_path,
             '-x', '0',
             '-y', '0',
-            '-z', '0.5',
-            '-robot_namespace', '',
-            '-reference_frame', 'base_link'
+            '-z', '0.1',
+            '-robot_namespace', 'robko01',
+            '-reference_frame', 'world'
         ],
         output='screen'
     )
 
     return LaunchDescription([
         gazebo,
+        robot_state_publisher_node,
         spawn_robot
     ])
