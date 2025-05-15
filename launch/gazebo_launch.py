@@ -36,54 +36,70 @@ import xacro
 
 def generate_launch_description():
 
-    # Package and file paths
+    # Path to the package.
     package_name = 'robko01_ros2'
-    pkg_share = FindPackageShare(package=package_name).find(package_name)
-    xacro_path = os.path.join(pkg_share, 'description', 'robko01.urdf.xacro')
+    package_path = FindPackageShare(package=package_name).find(package_name)
+
+    # Path to the URDF model.
+    # urdf_model_path = os.path.join(package_path, 'urdf', 'robko01.urdf')
+    robot_model_path = os.path.join(package_path, 'description', 'robko01.urdf.xacro')
 
     # Process xacro to URDF
-    urdf_xml = xacro.process_file(xacro_path).toxml()
+    robot_description = xacro.process_file(robot_model_path).toxml()
 
     # Write to temporary file
     tmp_urdf = tempfile.NamedTemporaryFile(delete=False, suffix=".urdf")
-    tmp_urdf.write(urdf_xml.encode('utf-8'))
+    tmp_urdf.write(robot_description.encode("utf-8"))
     tmp_urdf.close()
 
-    # Robot State Publisher
+    # Robot state publisher
     robot_state_publisher_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="screen",
         parameters=[{
-            'robot_description': urdf_xml,
-            'use_sim_time': True
+            "robot_description": robot_description,
+            "use_sim_time": True
         }]
     )
 
-    # Gazebo launch
+    # Gazebo
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            FindPackageShare('gazebo_ros'),
-            '/launch/gazebo.launch.py'
+            FindPackageShare("gazebo_ros"),
+            "/launch/gazebo.launch.py"
         ])
     )
 
     # Spawn robot
     spawn_robot = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
+        package="gazebo_ros",
+        executable="spawn_entity.py",
         arguments=[
-            '-entity', 'robko01',
-            '-file', tmp_urdf.name,
-            '-x', '0',
-            '-y', '0',
-            '-z', '0.1'
+            "-entity", "robko01",
+            "-file", tmp_urdf.name,
+            # "-topic", "robot_description",
+
+            # "-x", "0",
+            # "-y", "0",
+            # "-z", "0.1"
         ],
+        output="screen"
+    )
+
+    # RViz
+    rviz_config_path = os.path.join(package_path, 'rviz', 'default.rviz')
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_path],
         output='screen'
     )
 
     return LaunchDescription([
         gazebo,
         robot_state_publisher_node,
-        spawn_robot
+        spawn_robot,
+        rviz
     ])
