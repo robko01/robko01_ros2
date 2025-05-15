@@ -75,37 +75,37 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        elbow:
+        elbow_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        finger_1:
+        finger_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        finger_2:
+        finger_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        finger_3:
+        finger_3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        finger_4:
+        finger_4_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fingertip_l:
+        fingertip_l_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fingertip_r:
+        fingertip_r_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -115,17 +115,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        p:
+        p_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        shoulder:
+        shoulder_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        torso:
+        torso_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -220,5 +220,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1908
-  X: 1248
-  Y: -32
+  X: 1254
+  Y: -5
