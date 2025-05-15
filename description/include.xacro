@@ -9,7 +9,7 @@
 
     <!-- Specify some colours -->
     <material name="white">
-        <color rgba="1 1 1 1"/>
+        <color rgba="1.0 1.0 1.0 1.0"/>
     </material>
     <material name="black">
         <color rgba="0.0 0.0 0.0 1.0"/>
