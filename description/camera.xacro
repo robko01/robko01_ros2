@@ -8,49 +8,47 @@
             look at https://www.ros.org/reps/rep-0103.html#suffix-frames for slightly more information. -->
 
     <joint name="camera_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0.020 0.000 0.020" rpy="0 0 0"/>
         <parent link="gripper_main"/>
-        <child link="camera_link"/>        
+        <child link="gripper_camera_link"/>        
     </joint>
 
-    <link name="camera_link">
+    <link name="gripper_camera_link">
 		<inertial>
 			<origin xyz="0 0.0 0.0425" rpy="0.0 0.0 0.0" />
 			<mass value="10" />
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
         <collision>
-            <origin xyz="0.0 0 0" rpy="0 0 0"/>
+            <origin xyz="0.000 0.0 0.0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.12 0.15 0.15" />
+                <box size="0.010 0.020 0.020" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0.030 0.0 0.0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <cylinder length="0.010" radius="0.010" />
             </geometry>
         </collision>
         <visual>
-            <origin xyz="0.020 0.0 0.020" rpy="0 0 0"/>
+            <origin xyz="0.010 0.0 0.0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <box size="0.010 0.020 0.020" />
+                <cylinder length="0.020" radius="0.010" />
             </geometry>
             <material name="white" />
         </visual>
         <visual>
-            <origin xyz="0.030 0.0 0.020" rpy="0 ${pi/2} 0"/>
+            <origin xyz="0.010 0.0 0.0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <cylinder length="0.010" radius="0.010" />
+                <cylinder length="0.020" radius="0.010" />
             </geometry>
-            <material name="blue" />
+            <material name="white" />
         </visual>
     </link>
 
-    <joint name="camera_optical_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="-1.571 0 -1.571" />
-        <parent link="camera_link" />
-        <child link="camera_link_optical" />
-    </joint>
-
-    <link name="camera_link_optical"></link>
-
-    <gazebo reference="camera_link">
-        <sensor type="depth" name="my_camera">
+    <gazebo reference="gripper_camera_link">
+        <sensor type="depth" name="gripper_camera">
             <update_rate>20</update_rate>
             <visualize>true</visualize>
             <camera name="cam">
