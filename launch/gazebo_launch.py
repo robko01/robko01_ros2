@@ -44,15 +44,15 @@ def generate_launch_description():
     # urdf_model_path = os.path.join(package_path, 'urdf', 'robko01.urdf')
     robot_model_path = os.path.join(package_path, 'description', 'robko01.urdf.xacro')
 
-    # Process xacro to URDF
+    # Process xacro to URDF.
     robot_description = xacro.process_file(robot_model_path).toxml()
 
-    # Write to temporary file
+    # Write to temporary file.
     tmp_urdf = tempfile.NamedTemporaryFile(delete=False, suffix=".urdf")
     tmp_urdf.write(robot_description.encode("utf-8"))
     tmp_urdf.close()
 
-    # Robot state publisher
+    # Robot state publisher.
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
