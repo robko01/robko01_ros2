@@ -68,7 +68,10 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             FindPackageShare("gazebo_ros"),
             "/launch/gazebo.launch.py"
-        ])
+        ]),
+        launch_arguments={
+            "world": os.path.join(package_path, "worlds", "robko01.world")
+            }.items()
     )
 
     # Spawn robot
@@ -78,7 +81,7 @@ def generate_launch_description():
         arguments=[
             "-entity", "robko01",
             "-file", tmp_urdf.name,
-            "-timeout", "5",
+            "-timeout", "120",
             # "-topic", "robot_description",
             # "-x", "0",
             # "-y", "0",

@@ -39,6 +39,7 @@ setup(
         ('share/' + package_name + '/rviz', ['rviz/default.rviz']),
         ('share/' + package_name + '/meshes', [os.path.join("meshes/", f) for f in os.listdir("./meshes/") if f.endswith(('.STL'))]),
         ('share/' + package_name + '/description', [os.path.join("description/", f) for f in os.listdir("./description/") if f.endswith(('.xacro'))]),
+        ('share/' + package_name + '/worlds', [os.path.join("worlds/", f) for f in os.listdir("./worlds/") if f.endswith(('.world'))]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
