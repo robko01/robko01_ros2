@@ -50,6 +50,13 @@
         </plugin>
     </gazebo>
 
+
+    <gazebo>
+        <plugin name="libgazebo_ros_factory"
+            filename="libgazebo_ros_factory.so">
+        </plugin>
+    </gazebo>
+
     <!-- The next section shows an example of adding a sensor, in this case a depth camera. -->
 
     <!-- Due to a quirk of how cameras work, an extra joint/link is required to create an
