@@ -112,7 +112,7 @@
 			<material name="black" />
 		</visual>
 	</link>
-	<joint type="revolute" name="base">
+	<joint name="base" type="revolute">
 		<parent link="base_link" />
 		<child link="torso_link" />
 		<origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0" />
@@ -336,7 +336,7 @@
 			</material>
 		</visual> -->
 	</link>
-	<joint type="revolute" name="shoulder">
+	<joint name="shoulder" type="revolute">
 		<parent link="torso_link" />
 		<child link="shoulder_link" />
 		<origin xyz="0.0 0.0 0.150" rpy="0.0 0.0 0.0"/>
@@ -422,7 +422,7 @@
 			<material name="orange" />
 		</visual>
 	</link>
-	<joint type="revolute" name="elbow">
+	<joint name="elbow" type="revolute">
 		<parent link="shoulder_link" />
 		<child link="elbow_link" />
 		<origin xyz="0.0 0.0 0.1778" rpy="0.0 0.0 0.0"/>
@@ -508,7 +508,7 @@
 			<material name="orange" />
 		</visual>
 	</link>
-	<joint type="revolute" name="p">
+	<joint name="p" type="revolute">
 		<parent link="elbow_link" />
 		<child link="p_link" />
 		<origin xyz="0.1778 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -570,7 +570,7 @@
 			<material name="black" />
 		</visual>
 	</link>
-	<joint type="revolute" name="r">
+	<joint name="r" type="revolute">
 		<parent link="p_link" />
 		<child link="gripper_main" />
 		<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -626,7 +626,7 @@
 			<material name="dark_gray" />
 		</visual>
 	</link>
-	<joint type="revolute" name="finger_1">
+	<joint name="finger_1" type="revolute">
 		<parent link="gripper_main" />
 		<child link="finger_1_link" />
 		<origin xyz="0.0275 -0.035 0.0" rpy="0.0 0.0 0.0"/>
@@ -634,7 +634,7 @@
 		<limit upper="0.347" lower="-0.6" velocity="100" effort="100" />
 		<!-- <limit upper="0.6" lower="-0.6" velocity="100" effort="100" /> -->
 	</joint>
-	<joint type="revolute" name="finger_2">
+	<joint name="finger_2" type="revolute">
 		<parent link="gripper_main" />
 		<child link="finger_2_link" />
 		<origin xyz="0.0275 -0.028 0.0" rpy="0.0 0.0 0.0"/>
@@ -642,7 +642,7 @@
 		<limit upper="${pi/2}" lower="-${pi/2}" velocity="100" effort="100" />
 		<mimic joint="finger_1" multiplier="1.0" offset="0.0" />
 	</joint>
-	<joint type="revolute" name="finger_3">
+	<joint name="finger_3" type="revolute">
 		<parent link="gripper_main" />
 		<child link="finger_3_link" />
 		<origin xyz="0.0275 0.035 0.0" rpy="0.0 0.0 0.0"/>
@@ -650,7 +650,7 @@
 		<limit upper="${pi/2}" lower="-${pi/2}" velocity="100" effort="100" />
 		<mimic joint="finger_1" multiplier="-1.0" offset="0.0" />
 	</joint>
-	<joint type="revolute" name="finger_4">
+	<joint name="finger_4" type="revolute">
 		<parent link="gripper_main" />
 		<child link="finger_4_link" />
 		<origin xyz="0.0275 0.028 0.0" rpy="0.0 0.0 0.0"/>
@@ -738,7 +738,8 @@
 			<material name="dark_gray" />
 		</visual>
 	</link>
-	<joint type="revolute" name="fingertip_r">
+
+	<joint name="fingertip_r" type="revolute">
 		<parent link="finger_2_link" />
 		<child link="fingertip_r_link" />
 		<origin xyz="0.044 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -781,6 +782,7 @@
 			</material>
 		</visual> -->
 	</link>
+
 	<joint type="revolute" name="fingertip_l">
 		<parent link="finger_4_link" />
 		<child link="fingertip_l_link" />
