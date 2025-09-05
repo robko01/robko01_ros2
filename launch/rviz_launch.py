@@ -32,6 +32,27 @@ from launch_ros.substitutions import FindPackageShare
 
 import xacro
 
+def uppercase_extensions(package_path):
+    directory = os.path.join(package_path, "meshes")
+
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+
+        # Skip if it's a folder
+        if not os.path.isfile(filepath):
+            continue
+
+        # Split into name + extension
+        name, ext = os.path.splitext(filename)
+
+        # Only rename if extension exists
+        if ext and not ext[1:].isupper():  # ext includes "."
+            new_filename = f"{name}{ext.upper()}"
+            new_filepath = os.path.join(directory, new_filename)
+            
+            print(f"Renaming: {filename} -> {new_filename}")
+            os.rename(filepath, new_filepath)
+
 def generate_launch_description():
 
     # Path to the package.
@@ -44,6 +65,8 @@ def generate_launch_description():
 
     # Process xacro to URDF
     robot_description = xacro.process_file(robot_model_path).toxml()
+
+    uppercase_extensions(package_path)
 
     # Write to temporary file
     # tmp_urdf = tempfile.NamedTemporaryFile(delete=False, suffix=".urdf")
