@@ -54,7 +54,10 @@ ros2 run robko01_ros2 client
 ## Install dependencies
 
 ```sh
-sudo apt install ros-melodic-joint-state-publisher-gui
+sudo apt install ros-iron-joint-state-publisher-gui
+sudo apt install ros-iron-gz-gazebo ros-iron-gz-launch ros-iron-gz-sim ros-iron-ros-gz
+sudo apt install ros-iron-gazebo-ros-pkgs ros-iron-gazebo-ros-control
+sudo apt install ros-iron-xacro
 ```
 
 ## Run the vizualization in RViz
