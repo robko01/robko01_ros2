@@ -208,16 +208,16 @@
 				<box size="0.013 0.013 0.016"/>
 			</geometry>
 		</collision>
-		<collision name="p_r_c">
-			<origin xyz="0.0 -0.0155 0.0" rpy="${pi/2} 0.0 0.0" />
+		<collision name="ldg">
+			<origin  xyz="0.0 -0.025 0.0" rpy="-${pi/2} 0.0 0.0"/>
 			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</collision>
-		<collision name="p_l_c">
-			<origin xyz="0.0 0.0155 0.0" rpy="${pi/2} 0.0 0.0" />
+		<collision name="rdg">
+			<origin  xyz="0.0 0.025 0.0" rpy="${pi/2} 0.0 0.0"/>
 			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</collision>
 		<visual name="p_axis">
@@ -236,19 +236,19 @@
 			</geometry>
 			<material name="black" />
 		</visual>
-		<visual name="p_r_c">
-			<origin xyz="0.0 -0.0155 0.0" rpy="${pi/2} 0.0 0.0" />
+		<visual name="ldg">
+			<origin  xyz="0.0 -0.025 0.0" rpy="-${pi/2} 0.0 0.0"/>
 			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
-			<material name="black" />
+			<material name="orange" />
 		</visual>
-		<visual name="p_l_c">
-			<origin xyz="0.0 0.0155 0.0" rpy="${pi/2} 0.0 0.0" />
+		<visual name="rdg">
+			<origin  xyz="0.0 0.025 0.0" rpy="${pi/2} 0.0 0.0"/>
 			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
-			<material name="black" />
+			<material name="orange" />
 		</visual>
 	</link>
 	<joint name="r" type="revolute">
@@ -264,27 +264,18 @@
 			<mass value="10" />
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
+		<collision name="cdg">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 -${pi/2} 0.0" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</collision>
 		<collision name="r">
 			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.019 0.07 0.019"/>
 			</geometry>
 		</collision>
-		<collision name="p_c_c">
-			<origin xyz="0.0125 0.0 0.0" rpy="0.0 ${pi/2} 0.0" />
-			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
-			</geometry>
-		</collision>
-		<!-- <visual name="p_axis">
-			<origin xyz="0.0275 0.00 0.0" rpy="-${pi/2} 0.0 0.0" />
-			<geometry>
-				<cylinder radius="0.001" length="0.500"/>
-			</geometry>
-			<material name="AxisGreen">
-				<color rgba="0.0 1.0 0.0 1.0"/>
-			</material>
-		</visual> -->
 		<visual name="r_axis">
 			<origin xyz="0.0 0.0 0.0" rpy="0.0 -${pi/2} 0.0" />
 			<geometry>
@@ -292,19 +283,19 @@
 			</geometry>
 			<material name="red" />
 		</visual>
+		<visual name="cdg">
+			<origin xyz="0.025 0.0 0.0" rpy="0.0 -${pi/2} 0.0" />
+			<geometry>
+				<mesh filename="package://robko01_ros2/meshes/gear_bevel_1.5M20T_20PA_11FW.STL" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="dark_gray" />
+		</visual>
 		<visual name="r">
 			<origin xyz="0.0275 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<box size="0.019 0.07 0.019"/>
 			</geometry>
 			<material name="black" />
-		</visual>
-		<visual name="p_c_c">
-			<origin xyz="0.0125 0.0 0.0" rpy="0.0 ${pi/2} 0.0" />
-			<geometry>
-				<cylinder radius="0.0075" length="0.016"/>
-			</geometry>
-			<material name="dark_gray" />
 		</visual>
 	</link>
 	<joint name="finger_1" type="revolute">
@@ -448,13 +439,13 @@
 			<material name="dark_gray" />
 		</visual>
 		<collision name="finger_prism_r">
-			<origin xyz="-0.070 0.003 0.194" rpy="-${pi/2} 0.0 0.0" />
+			<origin xyz="0.0 0.003 0.0" rpy="-${pi/2} 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</collision>
 		<visual name="finger_prism_r">
-			<origin xyz="-0.070 0.003 0.194" rpy="-${pi/2} 0.0 0.0" />
+			<origin xyz="0.0 0.003 0.0" rpy="-${pi/2} 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
@@ -492,13 +483,13 @@
 			<material name="dark_gray" />
 		</visual>
 		<collision name="finger_prism_l">
-			<origin xyz="-0.070 -0.0030 -0.194" rpy="${pi/2} 0.0 0.0" />
+			<origin xyz="0.0 -0.0030 0.0" rpy="${pi/2} 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</collision>
 		<visual name="finger_prism_l">
-			<origin xyz="-0.070 -0.0030 -0.194" rpy="${pi/2} 0.0 0.0" />
+			<origin xyz="0.0 -0.0030 0.0" rpy="${pi/2} 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/finger_prism.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
