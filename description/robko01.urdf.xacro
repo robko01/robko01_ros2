@@ -90,7 +90,7 @@
 			</geometry>
 		</visual>
 		<visual name="torso_bottom">
-			<origin xyz="-0.120 0.037 -0.001" rpy="0.0 0.0 0.0" />
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/torso_bottom.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
@@ -99,7 +99,7 @@
 			</material>
 		</visual>
 		<visual name="torso_side_right">
-			<origin xyz="0.0 -0.0385 0.100" rpy="${pi/2} 0.0 0.0" />
+			<origin xyz="0.0 -0.0 0.0" rpy="${pi/2} 0.0 0.0" />
 			<geometry>
 				<mesh filename="package://robko01_ros2/meshes/torso_side_right.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
