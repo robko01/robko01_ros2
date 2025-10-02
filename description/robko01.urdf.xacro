@@ -146,6 +146,7 @@
 			<geometry>
 				<cylinder radius="0.001" length="0.500"/>
 			</geometry>
+			<material name="green"/>
 		</visual>
 		<visual name="shoulder_big_part">
 			<origin  xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -169,9 +170,9 @@
 			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
 		</inertial>
 		<collision name="elbow_big_part">
-			<origin xyz="0.0889 0.025 0.0" rpy="0.0 0.0 0.0" />
+			<origin  xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
 			<geometry>
-				<box size="0.1778 ${sheet_thickness} 0.050"/>
+				<mesh filename="package://robko01_ros2/meshes/elbow_big_part.STL" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</collision>
 		<visual name="elbow_axis">
